@@ -2,7 +2,8 @@
 a small example of community
 
 ## tools
-SpringBoot  
+SpringBoot   
+maven  
 Mysql  
 git  
 
