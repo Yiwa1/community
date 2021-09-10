@@ -5,7 +5,7 @@ a small example of community
 SpringBoot   
 maven  
 Mysql  
-h2
+h2  
 git  
 
 ## author
