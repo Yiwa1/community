@@ -2,9 +2,9 @@
 a small example of community
 
 ## tools
-SpringBoot
-Mysql
-git
+SpringBoot  
+Mysql  
+git  
 
 ## author
 ***yiwa***
