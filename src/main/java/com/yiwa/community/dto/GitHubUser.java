@@ -1,4 +1,4 @@
-package com.yiwa.community.community.dto;
+package com.yiwa.community.dto;
 
 import org.springframework.stereotype.Component;
 

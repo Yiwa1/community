@@ -1,4 +1,12 @@
+spring:
+  profiles:
+    active: prod
+
 github:
   client:
     id: 723ca7c1206fcfbff6cb
     secret: 1d95bd7386cece906dad5112cd3ef0a7a63d550a
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.yiwa.community.pojo

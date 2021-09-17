@@ -1,8 +1,8 @@
-package com.yiwa.community.community.provider;
+package com.yiwa.community.provider;
 
 import com.alibaba.fastjson.JSON;
-import com.yiwa.community.community.dto.AccessTokenDTO;
-import com.yiwa.community.community.dto.GitHubUser;
+import com.yiwa.community.dto.AccessTokenDTO;
+import com.yiwa.community.dto.GitHubUser;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
 
