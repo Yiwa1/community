@@ -10,4 +10,8 @@
     <select id="queryUserByToken" resultType="User">
         select * from USER where TOKEN=#{token}
     </select>
+
+    <select id="queryUserByAccountId" resultType="User">
+        select * from USER where ACCOUNT_ID=#{accountId}
+    </select>
 </mapper>

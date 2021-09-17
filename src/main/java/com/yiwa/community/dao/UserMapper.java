@@ -10,4 +10,6 @@ public interface UserMapper {
     void addUser(User user);
 
     User queryUserByToken(String token);
+
+    User queryUserByAccountId(String accountId);
 }

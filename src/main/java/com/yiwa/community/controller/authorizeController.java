@@ -45,15 +45,25 @@ public class authorizeController {
             //登录成功
             User user=new User();
             user.setAccountId(String.valueOf(gitHubUser.getId()));
-            user.setName(gitHubUser.getName());
-            user.setToken(UUID.randomUUID().toString());
-            user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtCreate());
-            userMapper.addUser(user);
-            //添加cookie持久登录
-            Cookie cookie = new Cookie("token", user.getToken());
-            cookie.setMaxAge(30000000);
-            response.addCookie(cookie);
+            User oldUser = userMapper.queryUserByAccountId(user.getAccountId());
+            if(oldUser ==null){
+                //第一次GitHub授权登录
+                user.setName(gitHubUser.getName());
+                user.setToken(UUID.randomUUID().toString());
+                user.setGmtCreate(System.currentTimeMillis());
+                user.setGmtModified(user.getGmtCreate());
+                userMapper.addUser(user);
+                //添加cookie持久登录
+                Cookie cookie = new Cookie("token", user.getToken());
+                cookie.setMaxAge(300000);
+                response.addCookie(cookie);
+            }else {
+                //曾经授权登录过
+                Cookie cookie=new Cookie("token",oldUser.getToken());
+                cookie.setMaxAge(300000);
+                response.addCookie(cookie);
+            }
+
         }
         return "redirect:/";
     }
