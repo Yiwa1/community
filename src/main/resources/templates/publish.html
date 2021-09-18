@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/publish.css">
+</head>
+<body style="background:#efefef">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="/">Yiwa's Home</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="form-inline my-2 my-lg-0 offset-1">
+            <input class="form-control mr-sm-2" type="search" placeholder="搜索问题" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <ul class="navbar-nav mr-auto offset-7">
+            <div th:if="${session.user==null}">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/login/oauth/authorize?client_id=723ca7c1206fcfbff6cb&redirect_uri=http://localhost:8080/callback&scop=user" tabindex="-1" aria-disabled="true">登录</a>
+                </li>
+            </div>
+
+            <div th:if="${session.user!=null}">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false" th:text="${session.user.getName()}"></a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">消息中心</a>
+                        <a class="dropdown-item" href="#">个人资料</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">退出登录</a>
+                    </div>
+                </li>
+            </div>
+        </ul>
+    </div>
+</nav>
+
+<div style="height: 86px"></div>
+
+<div class="container" style="background: white">
+    <div class="row">
+        <div class="col-md-9" style="padding: 20px;border-color: #e6e6e6;border-style: solid">
+            <h5> <img src="/bootstrap/font/stickies.svg" alt="" width="30px" height="30px">&nbsp;&nbsp;发起</h5>
+            <hr/>
+            <h5>问题标签(简单扼要)</h5>
+            <input type="text" class="form-control" name="title" placeholder="问题标题..." style="margin-top: 20px">
+
+            <h5 style="margin-top: 30px">问题补充(必填，请参考右侧提示)</h5>
+            <textarea class="form-control" name="description" style="margin-top: 10px" rows="7"></textarea>
+
+            <h5 style="margin-top: 30px;">添加标签:</h5>
+            <input type="text" class="form-control" placeholder="输入标签以，分隔" style="margin-top: 4px">
+            <div style="height: 25px"></div>
+            <button class="btn btn-success" style="float: right;margin-top: 11px;margin-bottom: 22px">发布</button>
+        </div>
+
+
+        <div class="col-md-3" style="border-style: solid;border-color: #e6e6e6;border-width: 2px">
+            <h3 style="margin-top: 15px"><img src="/bootstrap/font/chat-right-text.svg" alt="请仔细阅读" width="30px" height="30px">&nbsp;&nbsp;问题发起指南</h3>
+                <hr/>
+            <ul class="list-group">
+                <li class="list-group-item" style="margin-bottom: 36px;margin-top: 26px">问题标题:请用精简的语言描述您发布的问题,不超过25字</li>
+                <li class="list-group-item" style="margin-bottom: 90px;margin-top: 45px">问题补充:详细补充您的问题内容，并确保问题描述清晰直观,并提供一些相关资料</li>
+                <li class="list-group-item">选择标签:选择一个或多个合适的标签，用逗号隔开，每个标签不超过10个字</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div style="height: 56px"></div>
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/jquery-3.6.0.js"></script>
+<script src="/bootstrap/js/bootstrap.js"></script>
+<script src="/bootstrap/js/popper.min.js"></script>
+</body>
+</html>

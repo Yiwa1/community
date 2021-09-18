@@ -1,6 +1,8 @@
 spring:
   profiles:
     active: dev
+  thymeleaf:
+    cache: false
 
 github:
   client:

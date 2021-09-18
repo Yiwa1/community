@@ -35,5 +35,11 @@ public class routerController{
     }
 
 
+    @RequestMapping("/publish")
+    public String test(){
+        return "publish";
+    }
+
+
 
 }
