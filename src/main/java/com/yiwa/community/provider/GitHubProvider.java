@@ -15,9 +15,9 @@ public class GitHubProvider {
     public String getAccessToken(AccessTokenDTO accessToken){
         MediaType mediaType=MediaType.get("application/json; charset=utf-8");
         OkHttpClient client=new OkHttpClient.Builder()
-                .connectTimeout(60,TimeUnit.SECONDS)
-                .readTimeout(60,TimeUnit.SECONDS)
-                .writeTimeout(60,TimeUnit.SECONDS)
+                .connectTimeout(210,TimeUnit.SECONDS)
+                .readTimeout(210,TimeUnit.SECONDS)
+                .writeTimeout(210,TimeUnit.SECONDS)
                 .build();
         RequestBody body=RequestBody.create(mediaType,JSON.toJSONString(accessToken));
         Request request=new Request.Builder()
@@ -36,9 +36,9 @@ public class GitHubProvider {
 
     public GitHubUser getUser(String accessToken){
         OkHttpClient client=new OkHttpClient.Builder()
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .readTimeout(60,TimeUnit.SECONDS)
-                .writeTimeout(60,TimeUnit.SECONDS)
+                .connectTimeout(210, TimeUnit.SECONDS)
+                .readTimeout(210,TimeUnit.SECONDS)
+                .writeTimeout(210,TimeUnit.SECONDS)
                 .build();
 
         Request request=new Request.Builder()

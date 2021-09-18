@@ -12,17 +12,19 @@ public class User {
     private String token;
     private Long gmtCreate;
     private Long gmtModified;
+    private String bio;
 
     public User() {
     }
 
-    public User(int id, String accountId, String name, String token, Long gmtCreate, Long gmtModified) {
+    public User(int id, String accountId, String name, String token, Long gmtCreate, Long gmtModified,String bio) {
         this.id = id;
         this.accountId = accountId;
         this.name = name;
         this.token = token;
         this.gmtCreate = gmtCreate;
         this.gmtModified = gmtModified;
+        this.bio=bio;
     }
 
     public int getId() {
@@ -71,5 +73,13 @@ public class User {
 
     public void setGmtModified(Long gmtModified) {
         this.gmtModified = gmtModified;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 }
