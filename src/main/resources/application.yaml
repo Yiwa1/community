@@ -10,3 +10,5 @@ github:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.yiwa.community.pojo
+  configuration:
+    map-underscore-to-camel-case: true
