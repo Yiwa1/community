@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiwa.community.dao.QuestionMapper">
+    <insert id="createQuestion" parameterType="Question">
+        insert into QUESTION(title, description, tag, creator, gmt_create, gmt_modified, view_count, comment_count, like_count) VALUES ( #{title}, #{description}, #{tag}, #{creator}, #{gmtCreate}, #{gmtModified}, #{viewCount},#{commentCount}, #{likeCount})
+    </insert>
+
+</mapper>

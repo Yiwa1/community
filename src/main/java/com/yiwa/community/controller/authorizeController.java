@@ -41,7 +41,7 @@ public class authorizeController {
         accessToken.setClient_secret(client_secret);
         String token= gitHubProvide.getAccessToken(accessToken);
         GitHubUser gitHubUser = gitHubProvide.getUser(token);
-        if(gitHubUser!=null){
+        if(gitHubUser!=null&&gitHubUser.getId()!=null){
             //登录成功
             User user=new User();
             user.setAccountId(String.valueOf(gitHubUser.getId()));

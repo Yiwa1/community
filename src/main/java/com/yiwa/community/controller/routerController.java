@@ -4,6 +4,8 @@ import com.yiwa.community.dao.UserMapper;
 import com.yiwa.community.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -35,10 +37,12 @@ public class routerController{
     }
 
 
-    @RequestMapping("/publish")
-    public String test(){
+    @GetMapping("/publish")
+    public String toPublish(){
         return "publish";
     }
+
+
 
 
 

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/publish.css">
 </head>
 <body style="background:#efefef">
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="height: 51px">
     <a class="navbar-brand" href="/">Yiwa's Home</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <form class="form-inline my-2 my-lg-0 offset-1">
@@ -36,23 +36,38 @@
     </div>
 </nav>
 
-<div style="height: 86px"></div>
+<div th:if="${error==null}">
+    <div style="height: 70px"></div>
+</div>
+
+
+
+<div th:if="${error!=null}">
+    <div style="height: 48px"></div>
+    <div class="alert alert-warning alert-dismissible fade show text-center" role="alert"style="margin-bottom: 5px;margin-top: 8px;margin-left: 540px;width: 330px">
+        <a href="/" class="alert-link" th:text="${error}" style="text-align: right;margin-left: 35px"></a>
+    </div>
+</div>
+
+
 
 <div class="container" style="background: white">
     <div class="row">
         <div class="col-md-9" style="padding: 20px;border-color: #e6e6e6;border-style: solid">
-            <h5> <img src="/bootstrap/font/stickies.svg" alt="" width="30px" height="30px">&nbsp;&nbsp;发起</h5>
-            <hr/>
-            <h5>问题标签(简单扼要)</h5>
-            <input type="text" class="form-control" name="title" placeholder="问题标题..." style="margin-top: 20px">
+            <form action="/publish" method="post">
+                <h5> <img src="/bootstrap/font/stickies.svg" alt="" width="30px" height="30px">&nbsp;&nbsp;发起</h5>
+                <hr/>
+                <h5>问题标签(简单扼要)</h5>
+                <input type="text" class="form-control" name="title" placeholder="问题标题..." style="margin-top: 20px" th:value="${title}">
 
-            <h5 style="margin-top: 30px">问题补充(必填，请参考右侧提示)</h5>
-            <textarea class="form-control" name="description" style="margin-top: 10px" rows="7"></textarea>
+                <h5 style="margin-top: 30px">问题补充(必填，请参考右侧提示)</h5>
+                <textarea class="form-control" name="description" style="margin-top: 13px" rows="7" th:text="${description}"></textarea>
 
-            <h5 style="margin-top: 30px;">添加标签:</h5>
-            <input type="text" class="form-control" placeholder="输入标签以，分隔" style="margin-top: 4px">
-            <div style="height: 25px"></div>
-            <button class="btn btn-success" style="float: right;margin-top: 11px;margin-bottom: 22px">发布</button>
+                <h5 style="margin-top: 30px;">添加标签:</h5>
+                <input type="text" class="form-control" name="tag" placeholder="输入标签以，分隔" style="margin-top: 13px" th:value="${tag}">
+                <div style="height: 25px"></div>
+                <button class="btn btn-success" style="float: right;margin-top: 11px;margin-bottom: 14px">发布</button>
+            </form>
         </div>
 
 
@@ -67,6 +82,8 @@
         </div>
     </div>
 </div>
+
+
 
 <div style="height: 56px"></div>
 
