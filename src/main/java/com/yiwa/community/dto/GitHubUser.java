@@ -7,14 +7,16 @@ public class GitHubUser {
     private String name;;
     private Long id;
     private String bio;
+    private String avatarUrl;
 
     public GitHubUser() {
     }
 
-    public GitHubUser(String name, Long id, String bio) {
+    public GitHubUser(String name, Long id, String bio,String avatarUrl) {
         this.name = name;
         this.id = id;
         this.bio = bio;
+        this.avatarUrl=avatarUrl;
     }
 
     public String getName() {
@@ -41,12 +43,11 @@ public class GitHubUser {
         this.bio = bio;
     }
 
-    @Override
-    public String toString() {
-        return "GitHubUser{" +
-                "name='" + name + '\'' +
-                ", id=" + id +
-                ", bio='" + bio + '\'' +
-                '}';
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }

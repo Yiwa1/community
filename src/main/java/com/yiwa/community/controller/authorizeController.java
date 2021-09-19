@@ -53,6 +53,7 @@ public class authorizeController {
                 user.setGmtCreate(System.currentTimeMillis());
                 user.setGmtModified(user.getGmtCreate());
                 user.setBio(gitHubUser.getBio());
+                user.setAvatorUrl(gitHubUser.getAvatarUrl());
                 userMapper.addUser(user);
                 //添加cookie持久登录
                 Cookie cookie = new Cookie("token", user.getToken());

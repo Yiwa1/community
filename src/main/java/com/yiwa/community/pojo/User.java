@@ -13,11 +13,12 @@ public class User {
     private Long gmtCreate;
     private Long gmtModified;
     private String bio;
+    private String avatorUrl;
 
     public User() {
     }
 
-    public User(int id, String accountId, String name, String token, Long gmtCreate, Long gmtModified,String bio) {
+    public User(int id, String accountId, String name, String token, Long gmtCreate, Long gmtModified,String bio,String avatorUrl) {
         this.id = id;
         this.accountId = accountId;
         this.name = name;
@@ -25,6 +26,7 @@ public class User {
         this.gmtCreate = gmtCreate;
         this.gmtModified = gmtModified;
         this.bio=bio;
+        this.avatorUrl=avatorUrl;
     }
 
     public int getId() {
@@ -81,5 +83,13 @@ public class User {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public String getAvatorUrl() {
+        return avatorUrl;
+    }
+
+    public void setAvatorUrl(String avatorUrl) {
+        this.avatorUrl = avatorUrl;
     }
 }
