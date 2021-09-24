@@ -7,4 +7,24 @@
         insert into QUESTION(title, description, tag, creator, gmt_create, gmt_modified, view_count, comment_count, like_count) VALUES ( #{title}, #{description}, #{tag}, #{creator}, #{gmtCreate}, #{gmtModified}, #{viewCount},#{commentCount}, #{likeCount})
     </insert>
 
+    <select id="queryUserByAccountId" resultType="User">
+        select * from USER where ACCOUNT_ID=#{accountId}
+    </select>
+
+    <resultMap id="questions" type="QuestionDTO">
+        <result property="creator" column="creator"/>
+        <association property="user" column="creator" select="queryUserByAccountId"/>
+    </resultMap>
+
+
+    <select id="QueryAllQuestion" resultMap="questions">
+        select * from QUESTION limit #{offset},#{pageSize}
+    </select>
+
+    <select id="count" resultType="Integer">
+        select count(*) from question
+    </select>
+
+
+
 </mapper>

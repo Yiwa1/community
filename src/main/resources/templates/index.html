@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Yiwa's HOME</title>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/index.css">
 
 
 
@@ -48,9 +49,86 @@
     </div>
 </nav>
 
+<div th:if="${msg==null}">
+    <div style="height: 70px"></div>
+</div>
+
+<div th:if="${msg!=null}">
+    <div style="height: 48px" id="msgBlock"></div>
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert"style="margin-bottom: 5px;margin-top: 8px;">
+        <a href="/" class="alert-link" th:text="${msg}" style="text-align: right;margin-left: 35px"></a>
+    </div>
+</div>
+
+
+<div class="container" style="background: white">
+    <div class="row">
+        <div class="col-md-9" style="padding: 20px;border-color: #e6e6e6;border-style: solid">
+
+                <h5> <img src="/bootstrap/font/list-ul.svg" alt="" width="30px" height="30px">&nbsp;&nbsp;发现</h5>
+                <hr/>
+            <ul class="list-unstyled">
+                <li class="media my-1" th:each="question : ${questions}">
+                    <img th:src="${question.getUser().getAvatarUrl()}" class="mr-3 rounded" alt="..." style="width: 45px;height: 45px">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1" style="font-size:18px" th:text="${question.getTitle()}"></h5>
+                        <span class="questionInfo" style="margin-bottom: 5px">• <span th:text="${question.getUser().getName()}"></span> 发起了问题 • <span th:text="${question.getCommentCount()}"></span> 个回复 • <span th:text="${question.getViewCount()}"></span> 次浏览 • <span th:text="${question.getLikeCount()}"></span>次点赞  • <span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm:ss')}"></span></span>
+                        <hr class="questionInfo">
+                    </div>
+                </li>
+            </ul>
+
+
+            <div th:if="${pagination!=null}">
+                <nav aria-label="Page navigation example" style="float: right">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{/(page=1,pageSize=${pagination.getPageSize()})}" th:hidden="${!pagination.hasFront}"><<</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{/(page=${pagination.getPage()-1})}" aria-label="Previous" th:hidden="${!pagination.isHasPre()}">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:each="item:${pagination.getPages()}" th:class="${item==pagination.getPage()}?'page-item active':''"><a class="page-link" th:href="@{/(page=${item},pageSize=${pagination.getPageSize()})}"  th:text="${item}"></a></li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{/(page=${pagination.getPage()+1},pageSize=${pagination.getPageSize()})}"aria-label="Next" th:hidden="${!pagination.isHasNext()}">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{/(page=${pagination.getPageCount()},pageSize=${pagination.getPageSize()})}" th:hidden="${!pagination.hasEnd}">>></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+
+        </div>
+
+
+        <div class="col-md-3" style="border-style: solid;border-color: #e6e6e6;border-width: 2px">
+            <h3 style="margin-top: 15px"><img src="/bootstrap/font/chat-right-text.svg" alt="请仔细阅读" width="30px" height="30px">&nbsp;&nbsp;热门问题</h3>
+            <hr/>
+            <ul class="list-group">
+                <li class="list-group-item" style="margin-bottom: 36px;margin-top: 26px">问题标题:请用精简的语言描述您发布的问题,不超过25字</li>
+                <li class="list-group-item" style="margin-bottom: 90px;margin-top: 45px">问题补充:详细补充您的问题内容，并确保问题描述清晰直观,并提供一些相关资料</li>
+                <li class="list-group-item">选择标签:选择一个或多个合适的标签，用逗号隔开，每个标签不超过10个字</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+<div style="height: 56px"></div>
+
+
+
 
 <script src="/js/jquery-3.6.0.js"></script>
 <script src="/bootstrap/js/bootstrap.js"></script>
 <script src="/bootstrap/js/popper.min.js"></script>
+
 </body>
 </html>

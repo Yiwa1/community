@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="/css/publish.css">
 </head>
-<body style="background:#efefef">
+<body style="">
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="height: 51px">
     <a class="navbar-brand" href="/">Yiwa's Home</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -57,7 +57,7 @@
             <form action="/publish" method="post">
                 <h5> <img src="/bootstrap/font/stickies.svg" alt="" width="30px" height="30px">&nbsp;&nbsp;发起</h5>
                 <hr/>
-                <h5>问题标签(简单扼要)</h5>
+                <h5>问题标题(简单扼要)</h5>
                 <input type="text" class="form-control" name="title" placeholder="问题标题..." style="margin-top: 20px" th:value="${title}">
 
                 <h5 style="margin-top: 30px">问题补充(必填，请参考右侧提示)</h5>

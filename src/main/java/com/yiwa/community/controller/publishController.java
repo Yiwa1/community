@@ -2,6 +2,7 @@ package com.yiwa.community.controller;
 
 import com.yiwa.community.dao.QuestionMapper;
 import com.yiwa.community.dao.UserMapper;
+import com.yiwa.community.dto.QuestionDTO;
 import com.yiwa.community.pojo.Question;
 import com.yiwa.community.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class publishController {
@@ -61,8 +63,16 @@ public class publishController {
         question.setTag(tag);
         question.setGmtCreate(System.currentTimeMillis());
         question.setGmtModified(question.getGmtCreate());
-        question.setCreator(user.getName());
+        question.setCreator(user.getAccountId());
         questionMapper.createQuestion(question);
+
+        //发布成功，在首页提示
+        model.addAttribute("msg","问题发布成功,点击刷新页面");
+        Integer count = questionMapper.count();
+        Integer page=(int)Math.ceil((double)count/15);
+        Integer offset=count-1;
+        List<QuestionDTO> questions = questionMapper.QueryAllQuestion(offset,1);
+        model.addAttribute("questions",questions);
         return "index";
     }
 }

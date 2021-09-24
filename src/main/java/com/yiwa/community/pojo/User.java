@@ -13,12 +13,12 @@ public class User {
     private Long gmtCreate;
     private Long gmtModified;
     private String bio;
-    private String avatorUrl;
+    private String avatarUrl;
 
     public User() {
     }
 
-    public User(int id, String accountId, String name, String token, Long gmtCreate, Long gmtModified,String bio,String avatorUrl) {
+    public User(int id, String accountId, String name, String token, Long gmtCreate, Long gmtModified,String bio,String avatarUrl) {
         this.id = id;
         this.accountId = accountId;
         this.name = name;
@@ -26,7 +26,7 @@ public class User {
         this.gmtCreate = gmtCreate;
         this.gmtModified = gmtModified;
         this.bio=bio;
-        this.avatorUrl=avatorUrl;
+        this.avatarUrl=avatarUrl;
     }
 
     public int getId() {
@@ -85,11 +85,25 @@ public class User {
         this.bio = bio;
     }
 
-    public String getAvatorUrl() {
-        return avatorUrl;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 
-    public void setAvatorUrl(String avatorUrl) {
-        this.avatorUrl = avatorUrl;
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", accountId='" + accountId + '\'' +
+                ", name='" + name + '\'' +
+                ", token='" + token + '\'' +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                ", bio='" + bio + '\'' +
+                ", avatorUrl='" + avatarUrl + '\'' +
+                '}';
     }
 }

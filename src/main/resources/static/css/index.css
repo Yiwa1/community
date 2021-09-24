@@ -1,0 +1,13 @@
+.questionInfo{
+    font-size: 12px;
+    font-weight: normal;
+    color: #999;
+}
+
+.questionInfo,hr{
+    margin-top: 8px;
+}
+
+body{
+    background: url("https://elasticsearch.cn/static/css/default/img/bg.jpg") repeat;
+}
