@@ -17,12 +17,24 @@
     </resultMap>
 
 
-    <select id="QueryAllQuestion" resultMap="questions">
+    <select id="queryAllQuestion" resultMap="questions">
         select * from QUESTION limit #{offset},#{pageSize}
     </select>
 
     <select id="count" resultType="Integer">
         select count(*) from question
+    </select>
+
+    <select id="queryQuestionByAccountId" resultMap="questions">
+        select * from question where CREATOR=#{accountId} limit #{offset},#{pageSize}
+    </select>
+
+    <select id="countQuestionByAccountId" resultType="Integer">
+        select count(*) from question where CREATOR=#{accountId}
+    </select>
+
+    <select id="queryQuestionById" resultMap="questions">
+        select * from question where id=#{id}
     </select>
 
 

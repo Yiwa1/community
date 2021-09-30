@@ -14,4 +14,8 @@
     <select id="queryUserByAccountId" resultType="User">
         select * from USER where ACCOUNT_ID=#{accountId}
     </select>
+
+    <update id="updateUserInfo">
+        update USER set NAME=#{name},GMT_MODIFIED=#{gmtModified},BIO=#{bio},AVATAR_URL=#{avatarUrl}
+    </update>
 </mapper>

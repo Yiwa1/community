@@ -12,4 +12,6 @@ public interface UserMapper {
     User queryUserByToken(String token);
 
     User queryUserByAccountId(String accountId);
+
+    void updateUserInfo(User user);
 }

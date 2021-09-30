@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${sectionName}"></title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/profile..css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="/">Yiwa's Home</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="form-inline my-2 my-lg-0 offset-1">
+            <input class="form-control mr-sm-2" type="search" placeholder="搜索问题" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <ul class="navbar-nav mr-auto offset-6">
+            <div th:if="${session.user==null}">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/login/oauth/authorize?client_id=723ca7c1206fcfbff6cb&redirect_uri=http://localhost:8080/callback&scop=user" tabindex="-1" aria-disabled="true">登录</a>
+                </li>
+            </div>
+
+            <div th:if="${session.user!=null}">
+                <li class="nav-item">
+                    <a href="/publish" class="nav-link">提问&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                </li>
+            </div>
+
+            <div th:if="${session.user!=null}">
+                <li class="nav-item dropdown" >
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false" style="margin-top: -2px" th:text="${session.user.getName()}"></a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div th:if="${pagination!=null}">
+                            <a class="dropdown-item" th:href="@{/profile/questions/{page}/{pageSize}/(page=1,pageSize=${pagination.getPageSize()})}">我的消息</a>
+                        </div>
+                        <div th:if="${pagination==null}">
+                            <a class="dropdown-item" th:href="@{/profile/questions/{page}/{pageSize}/(page=1,pageSize=15)}">我的消息</a>
+                        </div>
+
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">退出登录</a>
+                    </div>
+                </li>
+            </div>
+        </ul>
+
+    </div>
+</nav>
+
+<div style="height: 70px"></div>
+
+<div class="container" style="background: white">
+    <div class="row">
+        <div class="col-md-9" style="padding: 20px;border-color: #e6e6e6;border-style: solid">
+
+            <h5> <img src="/bootstrap/font/list-ul.svg" alt="" width="30px" height="30px">&nbsp;&nbsp;<span th:text="${sectionName}"></span></h5>
+            <hr/>
+
+            <div th:if="${questions!=null}">
+                <ul class="list-unstyled">
+                    <li class="media my-1" th:each="question : ${questions}">
+                        <img th:src="${question.getUser().getAvatarUrl()}" class="mr-3 rounded" alt="..." style="width: 45px;height: 45px">
+                        <div class="media-body">
+                            <h5 class="mt-0 mb-1" style="font-size:15px;"><a th:text="${question.getTitle()}" th:href="@{/question/{id}/(id=${question.getId()})}" style="letter-spacing: 1px"></a></h5>
+                            <span class="questionInfo" style="margin-bottom: 5px">• <span th:text="${question.getUser().getName()}"></span> 发起了问题 • <span th:text="${question.getCommentCount()}"></span> 个回复 • <span th:text="${question.getViewCount()}"></span> 次浏览 • <span th:text="${question.getLikeCount()}"></span>次点赞  • <span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm:ss')}"></span></span>
+                            <hr class="questionInfo">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <div th:if="${pagination!=null}">
+                <nav aria-label="Page navigation example" style="float: right">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{/profile/{action}/{page}/{pageSize}/(action=${action},page=1,pageSize=${pagination.getPageSize()})}" th:hidden="${!pagination.hasFront}"><<</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{/profile/{action}/{page}/{pageSize}/(action=${action},page=${pagination.getPage()-1},pageSize=${pagination.getPageSize()})}" aria-label="Previous" th:hidden="${!pagination.isHasPre()}">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:each="item:${pagination.getPages()}" th:class="${item==pagination.getPage()}?'page-item active':''"><a class="page-link" th:href="@{/profile/{action}/{page}/{pageSize}(action=${action},page=${item},pageSize=${pagination.getPageSize()})}"  th:text="${item}"></a></li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{/profile/{action}/{page}/{pageSize}(action=${action},page=${pagination.getPage()+1},pageSize=${pagination.getPageSize()})}"aria-label="Next" th:hidden="${!pagination.isHasNext()}">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{/profile/{action}/{page}/{pageSize}(action=${action},page=${pagination.getPageCount()},pageSize=${pagination.getPageSize()})}" th:hidden="${!pagination.hasEnd}">>></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+
+        </div>
+
+
+            <div class="col-md-3" style="border-style: solid;border-color: #e6e6e6;border-width: 2px;padding: 1px">
+                <div class="list-group" style="margin-top: 4px;width: 100%">
+                    <a th:href="@{/profile/question/{page}/{pageSize}/(page=1,pageSize=${pagination.getPageSize()})}" th:class="${section}=='questions'? 'list-group-item list-group-item-action active':'list-group-item list-group-item-action'" aria-current="true" style="border-radius: 2px">我的提问</a>
+                    <a th:href="@{/profile/replies/{page}/{pageSize}/(page=1,pageSize=${pagination.getPageSize()})}" th:class="${section}=='replies'?'list-group-item list-group-item-action active':'list-group-item list-group-item-action'">问题回复<span class="badge badge-secondary offset-2">3</span></a>
+                </div>
+            </div>
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/jquery-3.6.0.js"></script>
+<script src="/bootstrap/js/bootstrap.js"></script>
+<script src="/bootstrap/js/popper.min.js"></script>
+</body>
+</html>

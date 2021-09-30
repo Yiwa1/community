@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${question.getTitle()}"></title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/question.css">
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" id="logo-yiwa" href="/">Yiwa's Home</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="form-inline my-2 my-lg-0 offset-1">
+            <input class="form-control mr-sm-2" type="search" placeholder="搜索问题" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <ul class="navbar-nav mr-auto offset-6">
+            <div th:if="${session.user==null}">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/login/oauth/authorize?client_id=723ca7c1206fcfbff6cb&redirect_uri=http://localhost:8080/callback&scop=user" tabindex="-1" aria-disabled="true">登录</a>
+                </li>
+            </div>
+
+            <div th:if="${session.user!=null}">
+                <li class="nav-item">
+                    <a href="/publish" class="nav-link">提问&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                </li>
+            </div>
+
+            <div th:if="${session.user!=null}">
+                <li class="nav-item dropdown" >
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false" style="margin-top: -2px" th:text="${session.user.getName()}"></a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div th:if="${pagination!=null}">
+                            <a class="dropdown-item" th:href="@{/profile/questions/{page}/{pageSize}/(page=1,pageSize=${pagination.getPageSize()})}">我的消息</a>
+                        </div>
+                        <div th:if="${pagination==null}">
+                            <a class="dropdown-item" th:href="@{/profile/questions/{page}/{pageSize}/(page=1,pageSize=15)}">我的消息</a>
+                        </div>
+
+
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">退出登录</a>
+                    </div>
+                </li>
+            </div>
+        </ul>
+
+    </div>
+</nav>
+
+<div style="height: 25px;"></div>
+
+<div class="container" style="background: white">
+    <div class="row">
+        <div class="col-md-9" style="padding: 20px;border-color: #e6e6e6;border-style: solid">
+            <h5 th:text="${question.getTitle()}" style="margin-top: 10px;font-size: 23px;letter-spacing: 1px"></h5>
+            <span class="questionInfo">作者 <span th:text="${question.getUser().getName()}"></span>|发布于 <span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm:ss')}"></span>|阅读数 <span th:text="${question.getViewCount()}"></span></span>
+            <hr/>
+            <span id="description" th:text="${question.getDescription()}"></span>
+            <hr style="margin-top: 6px;margin-bottom: 8px">
+            <div>
+                <a href="#" style="margin-left: 8px;" class="questionInfo"><img src="/bootstrap/font/chat-square-dots.svg" alt="...">&nbsp;添加评论</a>
+                <a href="#"style="margin-left: 17px" class="questionInfo" th:if="${session.user!=null&&question.getUser().getAccountId()==session.user.getAccountId()}"><img src="/bootstrap/font/pencil-square.svg" alt="..." style="margin-top: -3px">&nbsp;修改问题</a>
+            </div>
+
+        </div>
+
+        <div class="col-md-3" style="border-style: solid;border-color: #e6e6e6;border-width: 2px">
+            <h5 style="margin-top: 34px;margin-left: 7px;font-size: 18px;">发起人</h5>
+            <hr style="margin-top: 1px;margin-bottom: 5px">
+            <div class="media">
+                <img th:src="${question.getUser().getAvatarUrl()}" class="mr-3" alt="..." style="width: 32px;height: 32px;margin-left: 7px">
+                <div class="media-body">
+                    <h6 th:text="${question.getUser().getName()}" style="margin-top: 3px"></h6>
+                </div>
+            </div>
+            <hr style="margin-top: 6px;">
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<script src="/js/jquery-3.6.0.js"></script>
+<script src="/bootstrap/js/bootstrap.js"></script>
+<script src="/bootstrap/js/popper.min.js"></script>
+</body>
+</html>

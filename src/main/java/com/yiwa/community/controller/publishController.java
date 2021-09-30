@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.thymeleaf.util.StringUtils;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -31,22 +30,12 @@ public class publishController {
                            @RequestParam("tag")String tag,
                            HttpServletRequest request,
                            Model model){
-        Cookie[] cookies = request.getCookies();
-        User user=null;
-        for (Cookie cookie : cookies) {
-            if(cookie.getName().equals("token")){
-              user = userMapper.queryUserByToken(cookie.getValue());
-              break;
-            }
-        }
+
+        User user=(User) request.getSession().getAttribute("user");
         model.addAttribute("title",title);
         model.addAttribute("description",description);
         model.addAttribute("tag",tag);
-        if(user==null){
-            //未登录
-            model.addAttribute("error","请登录");
-            return "publish";
-        }else if(StringUtils.isEmpty(title)){
+        if(StringUtils.isEmpty(title)){
             model.addAttribute("error","标题不能为空");
             return "publish";
         }else if(StringUtils.isEmpty(description)){
@@ -68,10 +57,10 @@ public class publishController {
 
         //发布成功，在首页提示
         model.addAttribute("msg","问题发布成功,点击刷新页面");
-        Integer count = questionMapper.count();
+        Integer count = questionMapper.countQuestionByAccountId(user.getAccountId());
         Integer page=(int)Math.ceil((double)count/15);
         Integer offset=count-1;
-        List<QuestionDTO> questions = questionMapper.QueryAllQuestion(offset,1);
+        List<QuestionDTO> questions = questionMapper.queryQuestionByAccountId(user.getAccountId(),offset,1);
         model.addAttribute("questions",questions);
         return "index";
     }

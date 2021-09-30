@@ -18,6 +18,11 @@ import java.util.UUID;
 
 @Controller
 public class authorizeController {
+    /**
+     * @author yiwa
+     * @// TODO: 2021/9/30
+     * 通过GitHub授权登录
+     * */
     @Autowired
     AccessTokenDTO accessToken;
     @Autowired
@@ -35,6 +40,16 @@ public class authorizeController {
     public String callback(@RequestParam(name = "code")String code,
                            HttpServletRequest request,
                            HttpServletResponse response){
+        //检测用户是否接受Cookie
+        try{
+            Cookie cookie=new Cookie("test","trust-me");
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+        }catch (Exception e){
+            request.setAttribute("msg","请接受我们的cookie请求");
+            return "index";
+        }
+
         //设置access_token
         accessToken.setClient_id(client_id);
         accessToken.setCode(code);
@@ -45,22 +60,23 @@ public class authorizeController {
             //登录成功
             User user=new User();
             user.setAccountId(String.valueOf(gitHubUser.getId()));
+            user.setName(gitHubUser.getName());
+            user.setGmtModified(user.getGmtCreate());
+            user.setBio(gitHubUser.getBio());
+            user.setAvatarUrl(gitHubUser.getAvatarUrl());
+            user.setToken(UUID.randomUUID().toString());
+            user.setGmtCreate(System.currentTimeMillis());
             User oldUser = userMapper.queryUserByAccountId(user.getAccountId());
             if(oldUser ==null){
                 //第一次GitHub授权登录
-                user.setName(gitHubUser.getName());
-                user.setToken(UUID.randomUUID().toString());
-                user.setGmtCreate(System.currentTimeMillis());
-                user.setGmtModified(user.getGmtCreate());
-                user.setBio(gitHubUser.getBio());
-                user.setAvatarUrl(gitHubUser.getAvatarUrl());
                 userMapper.addUser(user);
                 //添加cookie持久登录
                 Cookie cookie = new Cookie("token", user.getToken());
                 cookie.setMaxAge(300000);
                 response.addCookie(cookie);
             }else {
-                //曾经授权登录过
+                //曾经授权登录过,更新用户信息
+                userMapper.updateUserInfo(user);
                 Cookie cookie=new Cookie("token",oldUser.getToken());
                 cookie.setMaxAge(300000);
                 response.addCookie(cookie);

@@ -5,9 +5,6 @@
     <title>Yiwa's HOME</title>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="/css/index.css">
-
-
-
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -27,20 +24,23 @@
 
             <div th:if="${session.user!=null}">
                 <li class="nav-item">
-                    <a href="/publish" class="nav-link">发布&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <a href="/publish" class="nav-link">提问&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                 </li>
             </div>
 
             <div th:if="${session.user!=null}">
                 <li class="nav-item dropdown" >
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false" style="margin-top: -2px" th:text="${session.user.getName()}">
-
-                    </a>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false" style="margin-top: -2px" th:text="${session.user.getName()}"></a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">消息中心</a>
-                        <a class="dropdown-item" href="#">个人资料</a>
+                        <div th:if="${pagination!=null}">
+                            <a class="dropdown-item" th:href="@{/profile/questions/{page}/{pageSize}/(page=1,pageSize=${pagination.getPageSize()})}">我的消息</a>
+                        </div>
+                        <div th:if="${pagination==null}">
+                            <a class="dropdown-item" th:href="@{/profile/questions/{page}/{pageSize}/(page=1,pageSize=15)}">我的消息</a>
+                        </div>
+
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">退出登录</a>
+                        <a class="dropdown-item" href="/logout">退出登录</a>
                     </div>
                 </li>
             </div>
@@ -48,6 +48,7 @@
 
     </div>
 </nav>
+
 
 <div th:if="${msg==null}">
     <div style="height: 70px"></div>
@@ -71,7 +72,7 @@
                 <li class="media my-1" th:each="question : ${questions}">
                     <img th:src="${question.getUser().getAvatarUrl()}" class="mr-3 rounded" alt="..." style="width: 45px;height: 45px">
                     <div class="media-body">
-                        <h5 class="mt-0 mb-1" style="font-size:18px" th:text="${question.getTitle()}"></h5>
+                        <h5 class="mt-0 mb-1" style="font-size:15px"><a th:href="@{/question/{id}/(id=${question.getId()})}" th:text="${question.getTitle()}" style="letter-spacing: 1px"></a></h5>
                         <span class="questionInfo" style="margin-bottom: 5px">• <span th:text="${question.getUser().getName()}"></span> 发起了问题 • <span th:text="${question.getCommentCount()}"></span> 个回复 • <span th:text="${question.getViewCount()}"></span> 次浏览 • <span th:text="${question.getLikeCount()}"></span>次点赞  • <span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm:ss')}"></span></span>
                         <hr class="questionInfo">
                     </div>
@@ -86,7 +87,7 @@
                             <a class="page-link" th:href="@{/(page=1,pageSize=${pagination.getPageSize()})}" th:hidden="${!pagination.hasFront}"><<</a>
                         </li>
                         <li class="page-item">
-                            <a class="page-link" th:href="@{/(page=${pagination.getPage()-1})}" aria-label="Previous" th:hidden="${!pagination.isHasPre()}">
+                            <a class="page-link" th:href="@{/(page=${pagination.getPage()-1},pageSize=${pagination.getPageSize()})}" aria-label="Previous" th:hidden="${!pagination.isHasPre()}">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
@@ -102,8 +103,6 @@
                     </ul>
                 </nav>
             </div>
-
-
         </div>
 
 

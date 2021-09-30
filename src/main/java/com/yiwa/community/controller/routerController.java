@@ -30,16 +30,18 @@ public class routerController{
                         @RequestParam(name = "pageSize",defaultValue = "15") Integer pageSize){
         //查看是否已经GitHub授权登录
       Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            if(cookie.getName().equals("token")){
-                String token = cookie.getValue();
-                User user =userMapper.queryUserByToken(token);
-                if(user!=null){
-                    request.getSession().setAttribute("user",user);
-                    break;
-                }
-            }
-        }
+      if(cookies!=null) {
+          for (Cookie cookie : cookies) {
+              if (cookie.getName().equals("token")) {
+                  String token = cookie.getValue();
+                  User user = userMapper.queryUserByToken(token);
+                  if (user != null) {
+                      request.getSession().setAttribute("user", user);
+                      break;
+                  }
+              }
+          }
+      }
         Integer totalCount=questionMapper.count();
 
         if(page<1){
@@ -56,7 +58,7 @@ public class routerController{
         Integer offset=(page-1)*pageSize;
 
 
-        List<QuestionDTO> questions = questionMapper.QueryAllQuestion(offset,pageSize);
+        List<QuestionDTO> questions = questionMapper.queryAllQuestion(offset,pageSize);
         model.addAttribute("questions",questions);
         model.addAttribute("pagination",paginationDTO);
         return "index";
