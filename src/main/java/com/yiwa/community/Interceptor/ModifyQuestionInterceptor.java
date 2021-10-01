@@ -1,7 +1,7 @@
 package com.yiwa.community.Interceptor;
 
+import com.yiwa.community.dao.QuestionMapper;
 import com.yiwa.community.dao.UserMapper;
-import com.yiwa.community.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -12,43 +12,42 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Service
-public class UserLoginInterceptor implements HandlerInterceptor {
+public class ModifyQuestionInterceptor implements HandlerInterceptor {
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    QuestionMapper questionMapper;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        int id= Integer.parseInt(request.getRequestURI().substring(request.getRequestURI().lastIndexOf("/")+1));
         Cookie[] cookies = request.getCookies();
-        User user=null;
-        if(cookies!=null){
+        Boolean hasToken=false;
+        //比较当前登录用户的token和问题发布者的token
+        if(cookies==null){
+            request.setAttribute("msg","请先登录");
+            request.getRequestDispatcher("/").forward(request,response);
+            System.out.println("hello 条住哪里");
+            return false;
+        }else {
             for (Cookie cookie : cookies) {
                 if(cookie.getName().equals("token")){
-                    user = userMapper.queryUserByToken(cookie.getValue());
-                    break;
+                    hasToken=true;
+                    if(!cookie.getValue().equals(questionMapper.queryQuestionById(id).getUser().getToken())){
+                        //不一致
+                        response.sendRedirect("/question/"+id);
+                        return false;
+                    }
                 }
             }
         }
-        if(user==null) {
-            //用户未登录
-            if(cookies!=null) {
-                request.setAttribute("msg", "未登录，点击跳转");
-                return false;
-            }else {
-                //监测用户是否接受我们的cookie
-                try {
-                    Cookie cookie=new Cookie("test","trust-me");
-                    cookie.setMaxAge(0);
-                    response.addCookie(cookie);
-                    request.setAttribute("msg", "未登录,点击跳转");
-                }catch (Exception e){
-                    //用户不接受Cookie
-                    request.setAttribute("msg","请接受我们的cookie请求");
-                }
-            }
+        if(!hasToken){
+            request.setAttribute("msg","请先登录");
             request.getRequestDispatcher("/").forward(request,response);
             return false;
         }
-         request.getSession().setAttribute("user", user);
+
         return true;
     }
 

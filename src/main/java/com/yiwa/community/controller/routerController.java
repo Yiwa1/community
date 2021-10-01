@@ -71,6 +71,17 @@ public class routerController{
         return "publish";
     }
 
+    @GetMapping("/publish/{id}")
+    public String toEdit(@PathVariable(value = "id") Integer id,
+                            Model model){
+        QuestionDTO questionDTO = questionMapper.queryQuestionById(id);
+        model.addAttribute("title",questionDTO.getTitle());
+        model.addAttribute("description",questionDTO.getDescription());
+        model.addAttribute("tag",questionDTO.getTag());
+        model.addAttribute("id",id);
+        return "publish";
+    }
+
 
 
 

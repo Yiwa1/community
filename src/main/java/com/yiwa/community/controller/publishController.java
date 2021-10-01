@@ -28,6 +28,7 @@ public class publishController {
     private String publish(@RequestParam("title")String title,
                            @RequestParam("description")String description,
                            @RequestParam("tag")String tag,
+                           @RequestParam("id")Integer id,
                            HttpServletRequest request,
                            Model model){
 
@@ -53,15 +54,25 @@ public class publishController {
         question.setGmtCreate(System.currentTimeMillis());
         question.setGmtModified(question.getGmtCreate());
         question.setCreator(user.getAccountId());
-        questionMapper.createQuestion(question);
 
-        //发布成功，在首页提示
-        model.addAttribute("msg","问题发布成功,点击刷新页面");
-        Integer count = questionMapper.countQuestionByAccountId(user.getAccountId());
-        Integer page=(int)Math.ceil((double)count/15);
-        Integer offset=count-1;
-        List<QuestionDTO> questions = questionMapper.queryQuestionByAccountId(user.getAccountId(),offset,1);
-        model.addAttribute("questions",questions);
+        //问题是发布还是修改
+        if(questionMapper.queryQuestionById(id)==null){
+            //发布问题
+            questionMapper.createQuestion(question);
+            //查出发布的问题并展示
+            Integer count = questionMapper.countQuestionByAccountId(user.getAccountId());
+            Integer offset=count-1;
+            List<QuestionDTO> questions = questionMapper.queryQuestionByAccountId(user.getAccountId(),offset,1);
+            model.addAttribute("questions",questions);
+            model.addAttribute("msg","问题发布成功,点击刷新页面");
+        }else {
+            //修改问题
+            question.setId(id);
+            questionMapper.updateQuestion(question);
+            QuestionDTO questions=questionMapper.queryQuestionById(id);
+            model.addAttribute("questions",questions);
+            model.addAttribute("msg","问题修改成功,点击刷新页面");
+        }
         return "index";
     }
 }

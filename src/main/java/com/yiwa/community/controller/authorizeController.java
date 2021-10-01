@@ -61,11 +61,11 @@ public class authorizeController {
             User user=new User();
             user.setAccountId(String.valueOf(gitHubUser.getId()));
             user.setName(gitHubUser.getName());
-            user.setGmtModified(user.getGmtCreate());
             user.setBio(gitHubUser.getBio());
             user.setAvatarUrl(gitHubUser.getAvatarUrl());
             user.setToken(UUID.randomUUID().toString());
             user.setGmtCreate(System.currentTimeMillis());
+            user.setGmtModified(user.getGmtCreate());
             User oldUser = userMapper.queryUserByAccountId(user.getAccountId());
             if(oldUser ==null){
                 //第一次GitHub授权登录

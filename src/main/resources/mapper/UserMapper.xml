@@ -16,6 +16,13 @@
     </select>
 
     <update id="updateUserInfo">
-        update USER set NAME=#{name},GMT_MODIFIED=#{gmtModified},BIO=#{bio},AVATAR_URL=#{avatarUrl}
+        update USER
+         <set>
+            NAME=#{name},
+            GMT_MODIFIED=#{gmtModified},
+            BIO=#{bio},
+            AVATAR_URL=#{avatarUrl}
+         </set>
+        where ACCOUNT_ID=#{accountId}
     </update>
 </mapper>

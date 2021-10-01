@@ -27,4 +27,6 @@ public interface QuestionMapper {
 
     QuestionDTO queryQuestionById(@Param("id") Integer id);
 
+    void updateQuestion(Question question);
+
 }

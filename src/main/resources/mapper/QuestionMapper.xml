@@ -37,6 +37,17 @@
         select * from question where id=#{id}
     </select>
 
+    <update id="updateQuestion">
+        update QUESTION
+         <set>
+            TITLE=#{title},
+            DESCRIPTION=#{description},
+            TAG=#{tag},
+            GMT_MODIFIED=#{gmtModified}
+         </set>
+        where id=#{id}
+    </update>
+
 
 
 </mapper>

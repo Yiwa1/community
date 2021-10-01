@@ -27,7 +27,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" th:href="@{/profile/questions/{page}/{pageSize}/(page=1,pageSize=15)}">消息中心</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">退出登录</a>
+                        <a class="dropdown-item" href="/logout">退出登录</a>
                     </div>
                 </li>
             </div>
@@ -56,6 +56,7 @@
             <form action="/publish" method="post">
                 <h5> <img src="/bootstrap/font/stickies.svg" alt="" width="30px" height="30px">&nbsp;&nbsp;发起</h5>
                 <hr/>
+                <input type="text" name="id" th:value="${id}" hidden>
                 <h5>问题标题(简单扼要)</h5>
                 <input type="text" class="form-control" name="title" placeholder="问题标题..." style="margin-top: 20px" th:value="${title}">
 
