@@ -14,3 +14,4 @@ mybatis:
   type-aliases-package: com.yiwa.community.pojo,com.yiwa.community.dto
   configuration:
     map-underscore-to-camel-case: true
+

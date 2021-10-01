@@ -11,6 +11,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 用户登录拦截器
+ * @author yiwa
+ * @version 1.0
+ * @Date: 2021/9/28
+ * */
 @Service
 public class UserLoginInterceptor implements HandlerInterceptor {
 
@@ -28,9 +34,11 @@ public class UserLoginInterceptor implements HandlerInterceptor {
                 }
             }
         }
+
         if(user==null) {
             //用户未登录
             if(cookies!=null) {
+                //可以添加cookie
                 request.setAttribute("msg", "未登录，点击跳转");
                 return false;
             }else {
@@ -48,7 +56,7 @@ public class UserLoginInterceptor implements HandlerInterceptor {
             request.getRequestDispatcher("/").forward(request,response);
             return false;
         }
-         request.getSession().setAttribute("user", user);
+        request.getSession().setAttribute("user", user);
         return true;
     }
 

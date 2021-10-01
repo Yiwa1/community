@@ -7,11 +7,11 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface UserMapper {
-    void addUser(User user);
-
     User queryUserByToken(String token);
 
     User queryUserByAccountId(String accountId);
+
+    void addUser(User user);
 
     void updateUserInfo(User user);
 }

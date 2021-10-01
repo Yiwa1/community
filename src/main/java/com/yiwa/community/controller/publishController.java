@@ -8,6 +8,8 @@ import com.yiwa.community.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.thymeleaf.util.StringUtils;
@@ -15,6 +17,12 @@ import org.thymeleaf.util.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * 问题发布与修改<br/>
+ * @author yiwa
+ * @version 1.0
+ * @Date: 2021/10/1
+ * */
 @Controller
 public class publishController {
 
@@ -24,6 +32,25 @@ public class publishController {
     @Autowired
     QuestionMapper questionMapper;
 
+    //跳转到发布问题页面
+    @GetMapping("/publish")
+    public String toPublish(){
+        return "publish";
+    }
+
+    //跳转到修改问题界面(和发布问题界面相同但携带了问题的参数)
+    @GetMapping("/publish/{id}")
+    public String toEdit(@PathVariable(value = "id") Integer id,
+                         Model model){
+        QuestionDTO questionDTO = questionMapper.queryQuestionById(id);
+        model.addAttribute("title",questionDTO.getTitle());
+        model.addAttribute("description",questionDTO.getDescription());
+        model.addAttribute("tag",questionDTO.getTag());
+        //将问题的id提交给前端用于修改问题
+        model.addAttribute("id",id);
+        return "publish";
+    }
+
     @PostMapping("/publish")
     private String publish(@RequestParam("title")String title,
                            @RequestParam("description")String description,
@@ -32,10 +59,15 @@ public class publishController {
                            HttpServletRequest request,
                            Model model){
 
+        //获取提问者(当前登录用户)信息
         User user=(User) request.getSession().getAttribute("user");
+
+        //保存用户的提交信息
         model.addAttribute("title",title);
         model.addAttribute("description",description);
         model.addAttribute("tag",tag);
+
+        //提示各种错误
         if(StringUtils.isEmpty(title)){
             model.addAttribute("error","标题不能为空");
             return "publish";
@@ -47,6 +79,7 @@ public class publishController {
             return "publish";
         }
 
+        //将信息封装成question
         Question question=new Question();
         question.setTitle(title);
         question.setDescription(description);

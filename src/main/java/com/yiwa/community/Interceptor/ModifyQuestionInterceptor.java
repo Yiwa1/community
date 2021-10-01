@@ -11,6 +11,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 修改问题权限拦截器
+ * */
 @Service
 public class ModifyQuestionInterceptor implements HandlerInterceptor {
 
@@ -26,9 +29,9 @@ public class ModifyQuestionInterceptor implements HandlerInterceptor {
         Boolean hasToken=false;
         //比较当前登录用户的token和问题发布者的token
         if(cookies==null){
+            //这里不判断是否接受cookie,交给登陆时判断
             request.setAttribute("msg","请先登录");
             request.getRequestDispatcher("/").forward(request,response);
-            System.out.println("hello 条住哪里");
             return false;
         }else {
             for (Cookie cookie : cookies) {

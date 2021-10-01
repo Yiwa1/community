@@ -6,7 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
+/**
+ * WebMvcConfig
+ * @author yiwa
+ * @version 1.0
+ * @Date: 2021/9/30
+ * */
 @Configuration
 public class MyWebMvcConfig implements WebMvcConfigurer {
     @Autowired

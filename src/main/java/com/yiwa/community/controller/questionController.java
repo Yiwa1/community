@@ -8,6 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+/**
+ * 跳转到单独问题页面
+ * @author yiwa
+ * @version 1.04
+ * @Date: 2021/10/1
+ * */
 @Controller
 public class questionController {
 

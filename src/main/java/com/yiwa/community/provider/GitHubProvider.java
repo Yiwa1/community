@@ -9,11 +9,26 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * GitHub授权工具类
+ * @author yiwa
+ * @version 1.0
+ * @Date: 2012/9/14
+ * */
 @Component
 public class GitHubProvider {
 
+    /**
+     * 通过post请求获取access_token
+     * @param accessToken 包含了从GitHub返回的code
+     * @return access_token 用来获取GitHub用户信息
+     * @author yiwa
+     * @version 1.0
+     * @Date: 2012/9/14
+     * */
     public String getAccessToken(AccessTokenDTO accessToken){
         MediaType mediaType=MediaType.get("application/json; charset=utf-8");
+        //由于访问GitHub速度较慢注意设置连接时长
         OkHttpClient client=new OkHttpClient.Builder()
                 .connectTimeout(210,TimeUnit.SECONDS)
                 .readTimeout(210,TimeUnit.SECONDS)
@@ -25,6 +40,7 @@ public class GitHubProvider {
                 .post(body)
                 .build();
         try(Response response=client.newCall(request).execute()) {
+            //返回的结果类似access_token=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&scope=&token_type=bearer
             String res=response.body().string();
             String[] token = res.split("&")[0].split("=");
             return token[1];
@@ -34,6 +50,12 @@ public class GitHubProvider {
         return null;
     }
 
+    /**
+     * 通过Get请求利用access_token获取用户信息
+     * @author yiwa
+     * @version 1.0
+     * @Date: 2021/9/14
+     * */
     public GitHubUser getUser(String accessToken){
         OkHttpClient client=new OkHttpClient.Builder()
                 .connectTimeout(210, TimeUnit.SECONDS)
@@ -53,9 +75,6 @@ public class GitHubProvider {
             e.printStackTrace();
         }
         return null;
-
-
     }
 
-    
 }

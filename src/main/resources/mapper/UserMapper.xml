@@ -19,9 +19,9 @@
         update USER
          <set>
             NAME=#{name},
-            GMT_MODIFIED=#{gmtModified},
             BIO=#{bio},
-            AVATAR_URL=#{avatarUrl}
+            AVATAR_URL=#{avatarUrl},
+            GMT_MODIFIED=#{gmtModified}
          </set>
         where ACCOUNT_ID=#{accountId}
     </update>

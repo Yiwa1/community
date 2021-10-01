@@ -5,6 +5,13 @@ import org.springframework.stereotype.Component;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 用于分页的DTO <br/>
+ * 当前页码左右各自最多显示三个页码<br/>
+ * Example：当前页为第四页，显示的页码最多为 |1| |2| |3| |4| |5| |6| |7|<br/>
+ * 当位于第一页时hasPre=false,位于最后一页时hasNext=false<br/>
+ * 当第一页不在所显示的页码中hasFront=true,当最后一页不在所显示的页码中hasEnd=true
+ * */
 @Component
 public class PaginationDTO {
     //当前页
@@ -77,6 +84,7 @@ public class PaginationDTO {
         return pages;
     }
 
+    //计算应该显示的页码
     private void setPages() {
         pages=new LinkedList<Integer>();
         pages.add(0,page);
