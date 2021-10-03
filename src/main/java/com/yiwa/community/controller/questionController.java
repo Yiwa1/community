@@ -2,6 +2,8 @@ package com.yiwa.community.controller;
 
 import com.yiwa.community.dao.QuestionMapper;
 import com.yiwa.community.dto.QuestionDTO;
+import com.yiwa.community.exception.CustomizeErrorCode;
+import com.yiwa.community.exception.QuestionNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +25,12 @@ public class questionController {
     @GetMapping("/question/{id}")
     public String toQuestion(@PathVariable(value = "id") Integer id,
                              Model model){
-        QuestionDTO question = questionMapper.queryQuestionById(id);
+
+        QuestionDTO question = null;
+        question = questionMapper.queryQuestionById(id);
+        if(question==null){
+            throw new QuestionNotFoundException(CustomizeErrorCode.QUESTION_NOT_FOUND.getMessage());
+        }
         model.addAttribute("question",question);
         return "question";
 

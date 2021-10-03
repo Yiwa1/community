@@ -38,8 +38,6 @@ class CommunityApplicationTests {
     void contextLoads() {
         QuestionDTO questionDTO = questionMapper.queryQuestionById(10);
         System.out.println(questionDTO);
-
-
     }
 
 }
