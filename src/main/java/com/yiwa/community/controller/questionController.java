@@ -31,8 +31,9 @@ public class questionController {
         if(question==null){
             throw new QuestionNotFoundException(CustomizeErrorCode.QUESTION_NOT_FOUND.getMessage());
         }
+        questionMapper.incViewCount(id);
+        question=questionMapper.queryQuestionById(id);
         model.addAttribute("question",question);
         return "question";
-
     }
 }

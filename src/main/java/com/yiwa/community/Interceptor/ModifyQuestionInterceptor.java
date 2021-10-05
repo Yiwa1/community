@@ -2,6 +2,8 @@ package com.yiwa.community.Interceptor;
 
 import com.yiwa.community.dao.QuestionMapper;
 import com.yiwa.community.dao.UserMapper;
+import com.yiwa.community.exception.CustomizeErrorCode;
+import com.yiwa.community.exception.QuestionNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -25,6 +27,11 @@ public class ModifyQuestionInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         int id= Integer.parseInt(request.getRequestURI().substring(request.getRequestURI().lastIndexOf("/")+1));
+        //检测问题是否存在
+        if(questionMapper.queryQuestionById(id)==null){
+            throw new QuestionNotFoundException(CustomizeErrorCode.QUESTION_NOT_FOUND.getMessage());
+        }
+
         Cookie[] cookies = request.getCookies();
         Boolean hasToken=false;
         //比较当前登录用户的token和问题发布者的token

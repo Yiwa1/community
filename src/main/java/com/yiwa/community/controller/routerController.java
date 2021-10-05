@@ -87,7 +87,6 @@ public class routerController{
         List<QuestionDTO> questions = questionMapper.queryAllQuestion(offset,pageSize);
         model.addAttribute("questions",questions);
         model.addAttribute("pagination",paginationDTO);
-        int a=10/0;
         return "index";
     }
 

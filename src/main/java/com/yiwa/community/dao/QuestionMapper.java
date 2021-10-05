@@ -29,4 +29,6 @@ public interface QuestionMapper {
 
     void updateQuestion(Question question);
 
+    void incViewCount(Integer id);
+
 }

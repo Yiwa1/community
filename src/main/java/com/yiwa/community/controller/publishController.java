@@ -55,7 +55,7 @@ public class publishController {
     private String publish(@RequestParam("title")String title,
                            @RequestParam("description")String description,
                            @RequestParam("tag")String tag,
-                           @RequestParam("id")Integer id,
+                           @RequestParam(value = "id")Integer id ,
                            HttpServletRequest request,
                            Model model){
 
