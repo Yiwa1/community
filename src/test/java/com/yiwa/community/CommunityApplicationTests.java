@@ -1,9 +1,10 @@
 package com.yiwa.community;
 
 
+import com.yiwa.community.dao.CommentMapper;
 import com.yiwa.community.dao.QuestionMapper;
 import com.yiwa.community.dao.UserMapper;
-import com.yiwa.community.dto.QuestionDTO;
+import com.yiwa.community.pojo.Comment;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,13 +32,24 @@ class CommunityApplicationTests {
     @Autowired
     QuestionMapper questionMapper;
 
+    @Autowired
+    CommentMapper commentMapper;
+
 
 
 
     @Test
     void contextLoads() {
-        QuestionDTO questionDTO = questionMapper.queryQuestionById(10);
-        System.out.println(questionDTO);
+        Comment comment=new Comment();
+        comment.setType(1);
+        comment.setParentId(1L);
+        comment.setContent("hello");
+        comment.setCreator("79003485");
+        comment.setGmtModified(System.currentTimeMillis());
+        comment.setGmtCreate(comment.getGmtModified());
+        commentMapper.createComment(comment);
+
+
     }
 
 }
