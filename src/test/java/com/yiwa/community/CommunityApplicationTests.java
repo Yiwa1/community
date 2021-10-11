@@ -42,7 +42,7 @@ class CommunityApplicationTests {
     void contextLoads() {
         Comment comment=new Comment();
         comment.setType(1);
-        comment.setParentId(1L);
+        comment.setParentId(1);
         comment.setContent("hello");
         comment.setCreator("79003485");
         comment.setGmtModified(System.currentTimeMillis());

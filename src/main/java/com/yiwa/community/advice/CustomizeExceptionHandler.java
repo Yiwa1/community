@@ -1,7 +1,6 @@
 package com.yiwa.community.advice;
 
-import com.yiwa.community.exception.CommentHaveNoTargetException;
-import com.yiwa.community.exception.QuestionNotFoundException;
+import com.yiwa.community.exception.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -32,12 +31,28 @@ public class CustomizeExceptionHandler{
     }
 
 
-    @ExceptionHandler(CommentHaveNoTargetException.class)
+    @ExceptionHandler({CommentHaveNoTargetException.class, CommentTypeException.class, CommentContentException.class, UserNoLoginException.class})
     @ResponseBody
     public Object handleCommentHaveNoTargetException(HttpServletRequest request,HttpServletResponse response,Throwable ex){
         if(ex instanceof CommentHaveNoTargetException){
             Map<String,Object> resultMap=new HashMap<>();
-            resultMap.put(((CommentHaveNoTargetException) ex).getErrorCode(),ex.getMessage());
+            resultMap.put("status",((CommentHaveNoTargetException) ex).getErrorCode());
+            resultMap.put("msg",ex.getMessage());
+            return resultMap;
+        }else if(ex instanceof CommentTypeException){
+            Map<String,Object> resultMap=new HashMap<>();
+            resultMap.put("status",((CommentTypeException) ex).getErrorCode());
+            resultMap.put("msg",ex.getMessage());
+            return resultMap;
+        }else if(ex instanceof CommentContentException){
+            Map<String,Object> resultMap=new HashMap<>();
+            resultMap.put("status",((CommentContentException) ex).getErrorCode());
+            resultMap.put("msg",ex.getMessage());
+            return resultMap;
+        }else if(ex instanceof UserNoLoginException){
+            Map<String,Object> resultMap=new HashMap<>();
+            resultMap.put("status",((UserNoLoginException) ex).getErrorCode());
+            resultMap.put("msg",ex.getMessage());
             return resultMap;
         }
         return new ModelAndView("error/404");

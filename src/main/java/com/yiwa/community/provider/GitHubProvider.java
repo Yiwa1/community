@@ -24,7 +24,7 @@ public class GitHubProvider {
      * @return access_token 用来获取GitHub用户信息
      * @author yiwa
      * @version 1.0
-     * @Date: 2012/9/14
+     * @Date: 2021/9/14
      * */
     public String getAccessToken(AccessTokenDTO accessToken){
         MediaType mediaType=MediaType.get("application/json; charset=utf-8");

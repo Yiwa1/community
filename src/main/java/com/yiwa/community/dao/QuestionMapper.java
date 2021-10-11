@@ -31,4 +31,6 @@ public interface QuestionMapper {
 
     void incViewCount(Integer id);
 
+    void incCommentCount(@Param("id") int id,@Param("count") Integer count);
+
 }

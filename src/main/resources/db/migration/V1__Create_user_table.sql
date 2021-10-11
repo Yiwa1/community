@@ -9,4 +9,4 @@ create table USER
     BIO          VARCHAR(256),
     constraint USER_PK
         primary key (ID)
-);
+)engine innodb charset utf8;

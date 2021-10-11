@@ -38,14 +38,12 @@
                         <div th:if="${pagination==null}">
                             <a class="dropdown-item" th:href="@{/profile/questions/{page}/{pageSize}(page=1,pageSize=15)}">我的消息</a>
                         </div>
-
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/logout">退出登录</a>
                     </div>
                 </li>
             </div>
         </ul>
-
     </div>
 </nav>
 
@@ -123,7 +121,13 @@
 <div style="height: 56px"></div>
 
 
-
+<script type="application/javascript">
+    let closeable=window.localStorage.getItem("closeable");
+    if(closeable=="true"){
+        window.close();
+        window.localStorage.removeItem("closeable");
+    }
+</script>
 
 <script src="/js/jquery-3.6.0.js"></script>
 <script src="/bootstrap/js/bootstrap.js"></script>

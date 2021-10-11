@@ -69,9 +69,10 @@ public class routerController{
         Integer totalCount=questionMapper.count();
 
       //注意page异常输入
+
         if(page<1){
             page=1;
-        }else if(page>(int)Math.ceil((double)totalCount/pageSize)){
+        }else if(page!=1&&page>(int)Math.ceil((double)totalCount/pageSize)){
             page=(int)Math.ceil((double)totalCount/pageSize);
         }
 

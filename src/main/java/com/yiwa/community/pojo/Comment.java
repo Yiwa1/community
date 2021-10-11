@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class Comment{
     private Long id;
     private int type;
-    private Long parentId;
+    private int parentId;
     private String content;
     private String creator;
     private Long likeCount;
@@ -19,7 +19,7 @@ public class Comment{
     public Comment() {
     }
 
-    public Comment(Long id, int type, Long parentId, String content, String creator,Long likeCount, Long gmtCreate, Long gmtModified) {
+    public Comment(Long id, int type, int parentId, String content, String creator, Long likeCount, Long gmtCreate, Long gmtModified) {
         this.id = id;
         this.type = type;
         this.parentId = parentId;
@@ -46,11 +46,11 @@ public class Comment{
         this.type = type;
     }
 
-    public Long getParentId() {
+    public int getParentId() {
         return parentId;
     }
 
-    public void setParentId(Long parentId) {
+    public void setParentId(int parentId) {
         this.parentId = parentId;
     }
 

@@ -5,7 +5,7 @@
 <mapper namespace="com.yiwa.community.dao.CommentMapper">
 
     <insert id="createComment" parameterType="Comment">
-        insert into COMMENT(TYPE, PARENT_ID, CONTENT, CREATOR, GMT_CREATE, GMT_MODIFIED) VALUES (#{type},#{parentId},#{content},#{creator},#{gmtCreate},#{gmtModified})
+        insert into comment(TYPE, PARENT_ID, LIKE_COUNT, CONTENT, CREATOR, GMT_CREATE, GMT_MODIFIED) VALUES (#{type},#{parentId},#{likeCount},#{content},#{creator},#{gmtCreate},#{gmtModified})
     </insert>
 
 

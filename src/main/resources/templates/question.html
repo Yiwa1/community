@@ -5,6 +5,8 @@
     <title th:text="${question.getTitle()}"></title>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="/css/question.css">
+    <script src="/js/question.js"></script>
+
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" id="logo-yiwa" href="/">Yiwa's Home</a>
@@ -45,7 +47,6 @@
                 </li>
             </div>
         </ul>
-
     </div>
 </nav>
 
@@ -64,6 +65,26 @@
                 <a th:href="@{/publish/{id}(id=${question.getId()})}"style="margin-left: 17px" class="questionInfo" th:if="${session.user!=null&&question.getUser().getAccountId()==session.user.getAccountId()}"><img src="/bootstrap/font/pencil-square.svg" alt="..." style="margin-top: -3px">&nbsp;修改问题</a>
             </div>
 
+            <div class="questionInfo" style="margin-top: 15px" th:if="${session.user==null}">
+                <h6>请登录后评论</h6>
+            </div>
+            <div id="comment-section">
+                <div class="media comment" th:if="${session.user!=null}">
+                    <img th:src="${session.user.getAvatarUrl()}" alt="" class="rounded" style="width: 36px;height: 36px;margin-left: 7px">
+                    <div class="media-body comment_name">
+                        <h6 th:text="${session.user.getName()}"></h6>
+                    </div>
+                </div>
+                <div>
+                    <textarea class="form-control" rows="8" id="comment_content"></textarea>
+                </div>
+
+                <button class="btn btn-success btn-reply " style="float: right" onclick="comment()" th:class="${session.user==null}?'btn btn-success btn-reply disabled ':'btn btn-success btn-reply '">回复</button>
+                <div th:if="${session.user!=null}">
+                    <input type="hidden" th:value="${question.getId()}" id="question_id">
+                    <input type="hidden" th:value="${session.user.getAccountId()}" id="commenter_id">
+                </div>
+            </div>
         </div>
 
         <div class="col-md-3" style="border-style: solid;border-color: #e6e6e6;border-width: 2px">
@@ -93,5 +114,6 @@
 <script src="/js/jquery-3.6.0.js"></script>
 <script src="/bootstrap/js/bootstrap.js"></script>
 <script src="/bootstrap/js/popper.min.js"></script>
+
 </body>
 </html>

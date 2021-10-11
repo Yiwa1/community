@@ -52,6 +52,10 @@
         update QUESTION set VIEW_COUNT=VIEW_COUNT+1 where ID=#{id}
     </update>
 
+    <update id="incCommentCount">
+        update QUESTION set COMMENT_COUNT=COMMENT_COUNT+#{count} where ID=#{id}
+    </update>
+
 
 
 </mapper>

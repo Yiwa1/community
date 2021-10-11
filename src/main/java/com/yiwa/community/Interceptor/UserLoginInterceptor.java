@@ -40,6 +40,7 @@ public class UserLoginInterceptor implements HandlerInterceptor {
             if(cookies!=null) {
                 //可以添加cookie
                 request.setAttribute("msg", "未登录，点击跳转");
+                request.getRequestDispatcher("/").forward(request,response);
                 return false;
             }else {
                 //监测用户是否接受我们的cookie

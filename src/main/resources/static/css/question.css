@@ -23,3 +23,17 @@ a:hover{
     text-decoration: none;
 }
 
+.comment{
+    margin-top: 35px;
+    margin-bottom: 7px;
+}
+
+.comment_name{
+    margin-top: 7px;
+    margin-left: 6px;
+}
+
+.btn-reply{
+    margin-top: 7px;
+    margin-bottom: 10px;
+}

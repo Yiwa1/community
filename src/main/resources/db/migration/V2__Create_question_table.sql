@@ -10,4 +10,4 @@ create table question(
       COMMENT_COUNT INT,
       LIKE_COUNT INT,
       primary key (ID)
-);
+) engine innodb charset utf8;
