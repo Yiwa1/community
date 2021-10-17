@@ -4,6 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yiwa.community.dao.CommentMapper">
 
+    <select id="queryCommentByParentId" parameterType="Integer" resultType="Comment">
+        select * from comment where PARENT_ID=#{parentId} and TYPE=#{type}
+    </select>
+
     <insert id="createComment" parameterType="Comment">
         insert into comment(TYPE, PARENT_ID, LIKE_COUNT, CONTENT, CREATOR, GMT_CREATE, GMT_MODIFIED) VALUES (#{type},#{parentId},#{likeCount},#{content},#{creator},#{gmtCreate},#{gmtModified})
     </insert>

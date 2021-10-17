@@ -3,6 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yiwa.community.dao.UserMapper">
+    <select id="queryUserByAccountIdList" resultType="User">
+        select * from user where ACCOUNT_ID
+        in
+        <foreach collection="list" item="accountId" index="index" open="(" close=")" separator="," >
+            #{accountId}
+        </foreach>
+
+
+    </select>
+
     <insert id="addUser" parameterType="User">
         insert into USER (account_id, gmt_create, gmt_modified, name, token, bio, avatar_url) values (#{accountId},#{gmtCreate},#{gmtModified},#{name},#{token},#{bio},#{avatarUrl})
     </insert>
