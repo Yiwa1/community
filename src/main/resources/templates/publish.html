@@ -5,6 +5,7 @@
     <title>发布问题</title>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="/css/publish.css">
+    <script src="/js/publish.js"></script>
 </head>
 <body style="">
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="height: 51px">
@@ -64,7 +65,27 @@
                 <textarea class="form-control" name="description" style="margin-top: 13px" rows="7" th:text="${description}"></textarea>
 
                 <h5 style="margin-top: 30px;">添加标签:</h5>
-                <input type="text" class="form-control" name="tag" placeholder="输入标签以，分隔" style="margin-top: 13px" th:value="${tag}">
+                <input type="text" class="form-control" name="tag" placeholder="输入标签以英文逗号(,)分隔" style="margin-top: 13px" th:value="${tag}" id="taginput" onclick="show()" readonly>
+
+                <div id="tag-section" style="display: none">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top: 16px;">
+                        <li class="nav-item" role="presentation" th:each="tagDTO:${tagDTOs}">
+                            <a  class="nav-link" data-toggle="tab" th:href="${'#'+tagDTO.getCategoryName()}" role="tab" aria-selected="false" th:text="${tagDTO.getCategoryName()}"></a>
+                        </li>
+                        <!--                    <li class="nav-item" role="presentation">-->
+                        <!--                        <a class="nav-link" data-toggle="tab" href="#home" role="tab"  aria-selected="false">Home</a>-->
+                        <!--                    </li>-->
+                        <!--                 -->
+                    </ul>
+                    <div class="tab-content" id="myTabContent" style="margin-top: 12px;">
+                        <div th:each="tagDTO:${tagDTOs}" class="tab-pane fade" th:id="${tagDTO.getCategoryName()}" role="tabpanel">
+                            <span th:each="tag:${tagDTO.getTags()}" th:text="${tag}" class="badge badge-pill badge-info text-center" style="margin-left: 3px;margin-right: 8px;margin-top:6px;width: 120px;height: 40px;padding-top: 13px;" onclick="getTag(this)"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+
                 <div style="height: 25px"></div>
                 <button class="btn btn-success" style="float: right;margin-top: 11px;margin-bottom: 14px">发布</button>
             </form>

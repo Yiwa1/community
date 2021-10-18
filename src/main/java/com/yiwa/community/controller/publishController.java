@@ -1,8 +1,10 @@
 package com.yiwa.community.controller;
 
+import com.yiwa.community.cache.QuestionTag;
 import com.yiwa.community.dao.QuestionMapper;
 import com.yiwa.community.dao.UserMapper;
 import com.yiwa.community.dto.QuestionDTO;
+import com.yiwa.community.dto.TagDTO;
 import com.yiwa.community.pojo.Question;
 import com.yiwa.community.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +36,9 @@ public class publishController {
 
     //跳转到发布问题页面
     @GetMapping("/publish")
-    public String toPublish(){
+    public String toPublish(Model model){
+        List<TagDTO> tagDTOList = QuestionTag.getTagDTOList();
+        model.addAttribute("tagDTOs",tagDTOList);
         return "publish";
     }
 

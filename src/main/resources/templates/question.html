@@ -61,10 +61,18 @@
             <hr/>
             <span id="description" th:text="${question.getDescription()}"></span>
             <hr style="margin-top: 6px;margin-bottom: 8px">
-            <div>
-                <a href="#" style="margin-left: 8px;" class="questionInfo"><img src="/bootstrap/font/chat-square-dots.svg" alt="...">&nbsp;添加评论</a>
+            <div style="margin-bottom: 11px;">
+                <a href="#bottom" style="margin-left: 8px;" class="questionInfo"><img src="/bootstrap/font/chat-square-dots.svg" alt="...">&nbsp;添加评论</a>
                 <a th:href="@{/publish/{id}(id=${question.getId()})}"style="margin-left: 17px" class="questionInfo" th:if="${session.user!=null&&question.getUser().getAccountId()==session.user.getAccountId()}"><img src="/bootstrap/font/pencil-square.svg" alt="..." style="margin-top: -3px">&nbsp;修改问题</a>
             </div>
+
+            <hr style="color: #eee;margin-top: 5px;" >
+
+            <!-- 问题标签-->
+            <span th:each="tag:${question.getTag().split(',')}" class="tag-section" style="margin-left: 8px;margin-right: 3px;">
+                <span th:text="${tag}" class="badge badge-pill badge-primary"></span>
+            </span>
+
 
             <hr class="divide" style="margin-top: 30px">
 
@@ -101,11 +109,14 @@
 
                                 </div>
 
+
                             </div>
+                        <hr class="divide" style="margin-top: 15px;">
                         </div>
                         <hr class="divide">
                     </div>
                 </div>
+            <a name="bottom"></a>
             <div class="questionInfo" style="margin-top: 15px" th:if="${session.user==null}">
                 <h6>请登录后评论</h6>
             </div>
