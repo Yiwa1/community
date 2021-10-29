@@ -14,19 +14,19 @@
     </select>
 
     <insert id="addUser" parameterType="User">
-        insert into USER (account_id, gmt_create, gmt_modified, name, token, bio, avatar_url) values (#{accountId},#{gmtCreate},#{gmtModified},#{name},#{token},#{bio},#{avatarUrl})
+        insert into user (account_id, gmt_create, gmt_modified, name, token, bio, avatar_url) values (#{accountId},#{gmtCreate},#{gmtModified},#{name},#{token},#{bio},#{avatarUrl})
     </insert>
 
     <select id="queryUserByToken" resultType="User">
-        select * from USER where TOKEN=#{token}
+        select * from user where TOKEN=#{token}
     </select>
 
     <select id="queryUserByAccountId" resultType="User">
-        select * from USER where ACCOUNT_ID=#{accountId}
+        select * from user where ACCOUNT_ID=#{accountId}
     </select>
 
     <update id="updateUserInfo">
-        update USER
+        update user
          <set>
             NAME=#{name},
             BIO=#{bio},
