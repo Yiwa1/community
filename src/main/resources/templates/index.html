@@ -15,7 +15,7 @@
             <input class="form-control mr-sm-2" type="search" placeholder="搜索问题" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
-        <ul class="navbar-nav mr-auto offset-6">
+        <ul class="navbar-nav mr-auto offset-5">
             <div th:if="${session.user==null}">
                 <li class="nav-item">
                     <a class="nav-link" href="https://github.com/login/oauth/authorize?client_id=723ca7c1206fcfbff6cb&redirect_uri=http://localhost:8080/callback&scop=user" tabindex="-1" aria-disabled="true">登录</a>
@@ -24,9 +24,18 @@
 
             <div th:if="${session.user!=null}">
                 <li class="nav-item">
-                    <a href="/publish" class="nav-link">提问&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <a href="/publish" class="nav-link">提问&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                 </li>
             </div>
+
+            <div th:if="${session.user!=null}">
+                <li class="nav-item">
+                    <a th:href="@{/profile/replies/{page}/{pageSize}(page=1,pageSize=${pagination.getPageSize()})}" class="nav-link">回复<span class="badge badge-pill badge-primary" style="margin-left: 7px;">12</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                </li>
+            </div>
+
+
+
 
             <div th:if="${session.user!=null}">
                 <li class="nav-item dropdown" >

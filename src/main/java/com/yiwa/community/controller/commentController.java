@@ -1,9 +1,11 @@
 package com.yiwa.community.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.yiwa.community.dao.QuestionMapper;
 import com.yiwa.community.dto.CommentDTO;
 import com.yiwa.community.pojo.Comment;
 import com.yiwa.community.service.CommentService;
+import com.yiwa.community.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,9 +28,15 @@ import java.util.Map;
 
 @Controller
 public class commentController {
+    
+    @Autowired
+    QuestionMapper questionMapper;
 
     @Autowired
     CommentService commentService;
+
+    @Autowired
+    NotificationService notificationService;
 
 
 
@@ -43,6 +51,9 @@ public class commentController {
         Map<String,Object> resultMap=new HashMap<>();
         resultMap.put("status",200);
         resultMap.put("msg","评论发布成功");
+        //通知提问者有人回答问题
+//        Notification notification=new Notification();
+//        notificationService.addCommentNotification(notification,comment);
         return resultMap;
     }
 
@@ -60,6 +71,8 @@ public class commentController {
         Object res = JSON.toJSON(commentDTOS);
         return res;
     }
+
+
 
 
 

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>消息提醒</title>
+    <link rel="stylesheet" href="/css/replies.css">
+</head>
+<body>
+<div style="height: 70px"></div>
+
+<div class="container" style="background: white">
+    <div class="row">
+        <div class="col-md-9" style="padding: 20px;border-color: #e6e6e6;border-style: solid">
+            <div th:if="${pagination!=null}">
+                <nav aria-label="Page navigation example" style="float: right">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{/profile/{action}/{page}/{pageSize}/(action=${action},page=1,pageSize=${pagination.getPageSize()})}" th:hidden="${!pagination.hasFront}"><<</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{/profile/{action}/{page}/{pageSize}/(action=${action},page=${pagination.getPage()-1},pageSize=${pagination.getPageSize()})}" aria-label="Previous" th:hidden="${!pagination.isHasPre()}">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:each="item:${pagination.getPages()}" th:class="${item==pagination.getPage()}?'page-item active':''"><a class="page-link" th:href="@{/profile/{action}/{page}/{pageSize}(action=${action},page=${item},pageSize=${pagination.getPageSize()})}"  th:text="${item}"></a></li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{/profile/{action}/{page}/{pageSize}(action=${action},page=${pagination.getPage()+1},pageSize=${pagination.getPageSize()})}"aria-label="Next" th:hidden="${!pagination.isHasNext()}">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{/profile/{action}/{page}/{pageSize}(action=${action},page=${pagination.getPageCount()},pageSize=${pagination.getPageSize()})}" th:hidden="${!pagination.hasEnd}">>></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+<script src="/js/jquery-3.6.0.js"></script>
+<script src="/bootstrap/js/bootstrap.js"></script>
+<script src="/bootstrap/js/popper.min.js"></script>
+</body>
+</html>

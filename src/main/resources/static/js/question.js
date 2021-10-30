@@ -45,8 +45,7 @@ function subCommentShow(e){
         //二级评论状态为展开,将其关闭
         $("#subComment-"+id).removeClass("show");
         e.removeAttribute("data-collapse");
-        $("#comment-comment-img").removeClass("active");
-        $("#subComment-"+id).removeChild();
+        $("#comment-comment-img-"+id).removeClass("active");
     }else {
         if($("#subComment-"+id).children().length===1){
             //没有查询
@@ -100,7 +99,8 @@ function subCommentShow(e){
         //二级评论状态为关闭,将其展开
         $("#subComment-"+id).addClass("show");
         e.setAttribute("data-collapse","true");
-        $("#comment-comment-img").addClass("active");
+        $("#comment-comment-img-"+id).addClass("active");
+
     }
 }
 
@@ -139,6 +139,8 @@ function subComment(e){
         },
         complete:function (){
             location.reload();
+            $("#subComment-section-"+id).scrollIntoView();
+
         }
     })
 }

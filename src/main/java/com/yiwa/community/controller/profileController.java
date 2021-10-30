@@ -74,6 +74,7 @@ public class profileController {
             model.addAttribute("section","replies");
             model.addAttribute("sectionName","最新回复");
             model.addAttribute("action",action);
+            return "replies";
         }
         return "profile";
     }

@@ -1,0 +1,22 @@
+.questionInfo{
+    font-size: 13px;
+    font-weight: normal;
+    color: #999;
+    font-family: candara,"Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","WenQuanYi Micro Hei","Microsoft Yahei",sans-serif, -apple-system;
+    word-wrap: break-word;
+}
+
+.questionInfo,hr{
+    margin-top: 8px;
+}
+
+body{
+    background: url("https://elasticsearch.cn/static/css/default/img/bg.jpg") repeat;
+}
+
+a{
+    color: #155faa;
+}
+a:hover{
+    color: #428bca;
+}

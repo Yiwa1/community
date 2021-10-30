@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 问题发布与修改<br/>
@@ -82,7 +84,29 @@ public class publishController {
             model.addAttribute("error","必须添加一个标签");
             return "publish";
         }
-
+        String[] input = tag.split(",");
+        List<String> collect = QuestionTag.getTagDTOList().stream().flatMap(tagDTO -> tagDTO.getTags().stream()).collect(Collectors.toList());
+        Boolean isVaild=true;
+        for (String  inputTag: input) {
+            if(!collect.contains(inputTag)){
+                isVaild=false;
+            }
+        }
+        if(!isVaild){
+            model.addAttribute("error","有非法标签");
+            return "publish";
+        }
+        isVaild=true;
+        HashSet set=new HashSet();
+        for (String s : input) {
+            if(!set.add(s)){
+                isVaild=false;
+            }
+        }
+        if(!isVaild){
+            model.addAttribute("error","有重复标签");
+            return "publish";
+        }
         //将信息封装成question
         Question question=new Question();
         question.setTitle(title);

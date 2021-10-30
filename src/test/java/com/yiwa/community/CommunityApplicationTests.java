@@ -1,11 +1,10 @@
 package com.yiwa.community;
 
 
-import com.yiwa.community.cache.QuestionTag;
 import com.yiwa.community.dao.CommentMapper;
+import com.yiwa.community.dao.NotificationMapper;
 import com.yiwa.community.dao.QuestionMapper;
 import com.yiwa.community.dao.UserMapper;
-import com.yiwa.community.dto.TagDTO;
 import com.yiwa.community.service.CommentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
-import java.util.stream.Collectors;
 
 @SpringBootTest
 class CommunityApplicationTests {
@@ -41,12 +39,16 @@ class CommunityApplicationTests {
     @Autowired
     CommentService commentService;
 
+    @Autowired
+    NotificationMapper notificationMapper;
+
 
 
 
     @Test
     void contextLoads() {
-        System.out.println(QuestionTag.getTagDTOList().stream().map(TagDTO::getTags).collect(Collectors.toList()));
+        notificationMapper.queryNotificationByReceiverId("1",0,15);
+
 
 
     }

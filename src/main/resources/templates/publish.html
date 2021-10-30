@@ -15,12 +15,23 @@
             <input class="form-control mr-sm-2" type="search" placeholder="搜索问题" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
-        <ul class="navbar-nav mr-auto offset-7">
+        <ul class="navbar-nav mr-auto offset-6">
             <div th:if="${session.user==null}">
                 <li class="nav-item">
                     <a class="nav-link" href="https://github.com/login/oauth/authorize?client_id=723ca7c1206fcfbff6cb&redirect_uri=http://localhost:8080/callback&scop=user" tabindex="-1" aria-disabled="true">登录</a>
                 </li>
             </div>
+
+
+            <div th:if="${session.user!=null}">
+                <li class="nav-item" th:if="${pagination}!=null">
+                    <a th:href="@{/profile/replies/{page}/{pageSize}(page=1,pageSize=${pagination.getPageSize()})}" class="nav-link">回复<span class="badge badge-pill badge-primary" style="margin-left: 7px;">12</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                </li>
+                <li class="nav-item" th:if="${pagination}==null">
+                    <a th:href="@{/profile/replies/{page}/{pageSize}(page=1,pageSize=15)}" class="nav-link">回复<span class="badge badge-pill badge-primary" style="margin-left: 7px;">12</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                </li>
+            </div>
+
 
             <div th:if="${session.user!=null}">
                 <li class="nav-item dropdown">
@@ -65,7 +76,7 @@
                 <textarea class="form-control" name="description" style="margin-top: 13px" rows="7" th:text="${description}"></textarea>
 
                 <h5 style="margin-top: 30px;">添加标签:</h5>
-                <input type="text" class="form-control" name="tag" placeholder="输入标签以英文逗号(,)分隔" style="margin-top: 13px" th:value="${tag}" id="taginput" onclick="show()" readonly>
+                <input type="text" class="form-control" name="tag" placeholder="点击输入框,添加下方标签" style="margin-top: 13px" th:value="${tag}" id="taginput" onclick="show()" readonly >
 
                 <div id="tag-section" style="display: none">
                     <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top: 16px;">
@@ -82,7 +93,6 @@
                             <span th:each="tag:${tagDTO.getTags()}" th:text="${tag}" class="badge badge-pill badge-info text-center" style="margin-left: 3px;margin-right: 8px;margin-top:6px;width: 120px;height: 40px;padding-top: 13px;" onclick="getTag(this)"></span>
                         </div>
                     </div>
-
                 </div>
 
 
