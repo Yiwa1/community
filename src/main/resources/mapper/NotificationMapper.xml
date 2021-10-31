@@ -11,6 +11,10 @@
         select count(*) from notification where RECEIVER=#{receiverId} and STATUS=0
     </select>
 
+    <select id="queryMessageCount" resultType="int">
+        select count(*) from notification where RECEIVER=#{receiverId}
+    </select>
+
 
     <insert id="addNotification" parameterType="Notification">
         insert into notification(notifier, receiver, content, relate_id, type, gmt_create, status) VALUES (#{notifier}, #{receiver}, #{content}, #{relateId}, #{type}, #{gmtCreate}, #{status})

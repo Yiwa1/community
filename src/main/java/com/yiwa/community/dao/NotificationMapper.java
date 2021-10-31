@@ -14,6 +14,8 @@ public interface NotificationMapper {
 
     int queryUnReadMessageCount(@Param("receiverId") String receiverId);
 
+    int queryMessageCount(@Param("receiverId")String receiverId);
+
     void addNotification(Notification notification);
 
     void readMessage(@Param("id") Long id);

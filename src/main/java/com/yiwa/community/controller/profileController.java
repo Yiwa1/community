@@ -89,20 +89,22 @@ public class profileController {
         }else if(action.equals("replies")){
             //前往我的问题回复页面
             int count = notificationMapper.queryUnReadMessageCount(user.getAccountId());
+            int messageCount = notificationMapper.queryMessageCount(user.getAccountId());
             if(page==null||page<1){
                 page=1;
+            }
+            if(page>(int)Math.ceil((double)messageCount/pageSize)){
+                page=(int)Math.ceil((double)messageCount/pageSize);
             }
             if(pageSize==null){
                 pageSize=15;
             }
-            if(page>(int)Math.ceil((double)count/pageSize)){
-                page=(int)Math.ceil((double)count/pageSize);
-            }
+
 
             PaginationDTO paginationDTO=new PaginationDTO();
             paginationDTO.setPageSize(pageSize);
             paginationDTO.setPage(page);
-            paginationDTO.setTotalCount(count);
+            paginationDTO.setTotalCount(messageCount);
             paginationDTO.setPagination();
 
             Integer offset=(page-1)*pageSize;
