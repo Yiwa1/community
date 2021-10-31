@@ -1,6 +1,7 @@
 package com.yiwa.community.controller;
 
 import com.yiwa.community.cache.QuestionTag;
+import com.yiwa.community.dao.NotificationMapper;
 import com.yiwa.community.dao.QuestionMapper;
 import com.yiwa.community.dao.UserMapper;
 import com.yiwa.community.dto.QuestionDTO;
@@ -36,11 +37,19 @@ public class publishController {
     @Autowired
     QuestionMapper questionMapper;
 
+    @Autowired
+    NotificationMapper notificationMapper;
+
     //跳转到发布问题页面
     @GetMapping("/publish")
-    public String toPublish(Model model){
+    public String toPublish(Model model,
+                            HttpServletRequest request){
         List<TagDTO> tagDTOList = QuestionTag.getTagDTOList();
         model.addAttribute("tagDTOs",tagDTOList);
+        User user = (User)request.getSession().getAttribute("user");
+
+        int count = notificationMapper.queryUnReadMessageCount(user.getAccountId());
+        model.addAttribute("UnReadMessageCount",count);
         return "publish";
     }
 
@@ -54,6 +63,10 @@ public class publishController {
         model.addAttribute("tag",questionDTO.getTag());
         //将问题的id提交给前端用于修改问题
         model.addAttribute("id",id);
+
+        //查找未读消息
+        int count = notificationMapper.queryUnReadMessageCount(questionDTO.getCreator());
+        model.addAttribute("UnReadMessageCount",count);
         return "publish";
     }
 

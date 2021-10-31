@@ -12,6 +12,8 @@ import java.util.List;
 public interface CommentMapper {
     List<Comment> queryCommentByParentId(@Param("parentId") Integer parentId,@Param("type") Integer type);
 
+    Comment queryCommentById(@Param("id") Integer id);
+
     void createComment(Comment comment);
 
 }

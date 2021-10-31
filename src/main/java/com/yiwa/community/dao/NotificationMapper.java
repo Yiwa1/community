@@ -12,7 +12,13 @@ import java.util.List;
 public interface NotificationMapper {
     List<Notification> queryNotificationByReceiverId(@Param("receiverId") String receiverId, @Param("offset") Integer offset, @Param("pageSize") Integer pageSize);
 
+    int queryUnReadMessageCount(@Param("receiverId") String receiverId);
+
     void addNotification(Notification notification);
+
+    void readMessage(@Param("id") Long id);
+
+
 }
 
 

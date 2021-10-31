@@ -67,6 +67,7 @@ public class CommentService{
         List<User> users = userMapper.queryUserByAccountIdList(commenterId);
         Map<String, User> userMap = users.stream().collect(Collectors.toMap(user -> user.getAccountId(), user -> user));
 
+
         //将Comment转换为CommentDTO
         List<CommentDTO> commentDTOS = comments.stream().map(comment -> {
             CommentDTO commentDTO = new CommentDTO();

@@ -1,0 +1,1 @@
+alter table notification modify GMT_CREATE bigint;

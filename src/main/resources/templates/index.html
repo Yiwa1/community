@@ -29,13 +29,19 @@
             </div>
 
             <div th:if="${session.user!=null}">
-                <li class="nav-item">
-                    <a th:href="@{/profile/replies/{page}/{pageSize}(page=1,pageSize=${pagination.getPageSize()})}" class="nav-link">回复<span class="badge badge-pill badge-primary" style="margin-left: 7px;">12</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                <li class="nav-item" th:if="${pagination}!=null and${UnReadMessageCount}!=0">
+                    <a th:href="@{/profile/replies/{page}/{pageSize}(page=1,pageSize=${pagination.getPageSize()})}" class="nav-link">回复<span class="badge badge-pill badge-primary" style="margin-left: 7px;" th:text="${UnReadMessageCount}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                </li>
+                <li class="nav-item" th:if="${pagination}!=null and ${UnReadMessageCount}==0">
+                    <a th:href="@{/profile/replies/{page}/{pageSize}(page=1,pageSize=${pagination.getPageSize()})}" class="nav-link">回复<span class="badge badge-pill badge-primary" style="margin-left: 7px;"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                </li>
+                <li class="nav-item" th:if="${pagination}==null and ${UnReadMessageCount}!=0">
+                    <a th:href="@{/profile/replies/{page}/{pageSize}(page=1,pageSize=15)}" class="nav-link">回复<span class="badge badge-pill badge-primary" style="margin-left: 7px;" th:text="${UnReadMessageCount}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                </li>
+                <li class="nav-item" th:if="${pagination}==null and ${UnReadMessageCount}==0">
+                    <a th:href="@{/profile/replies/{page}/{pageSize}(page=1,pageSize=15)}" class="nav-link">回复<span class="badge badge-pill badge-primary" style="margin-left: 7px;"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                 </li>
             </div>
-
-
-
 
             <div th:if="${session.user!=null}">
                 <li class="nav-item dropdown" >

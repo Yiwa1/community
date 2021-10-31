@@ -7,9 +7,17 @@
         select * from notification where RECEIVER=#{receiverId} limit #{offset},#{pageSize}
     </select>
 
+    <select id="queryUnReadMessageCount" resultType="int">
+        select count(*) from notification where RECEIVER=#{receiverId} and STATUS=0
+    </select>
+
 
     <insert id="addNotification" parameterType="Notification">
         insert into notification(notifier, receiver, content, relate_id, type, gmt_create, status) VALUES (#{notifier}, #{receiver}, #{content}, #{relateId}, #{type}, #{gmtCreate}, #{status})
     </insert>
+
+    <update id="readMessage" parameterType="long">
+        update notification set STATUS=1 where ID=#{id}
+    </update>
 
 </mapper>

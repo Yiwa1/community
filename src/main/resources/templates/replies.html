@@ -1,16 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>消息提醒</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="/css/replies.css">
+    <script src="/js/notification.js"></script>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="/">Yiwa's Home</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="form-inline my-2 my-lg-0 offset-1">
+            <input class="form-control mr-sm-2" type="search" placeholder="搜索问题" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <ul class="navbar-nav mr-auto offset-5">
+            <div th:if="${session.user==null}">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/login/oauth/authorize?client_id=723ca7c1206fcfbff6cb&redirect_uri=http://localhost:8080/callback&scop=user" tabindex="-1" aria-disabled="true">登录</a>
+                </li>
+            </div>
+
+            <div th:if="${session.user!=null}">
+                <li class="nav-item">
+                    <a href="/publish" class="nav-link">提问&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                </li>
+            </div>
+
+            <div th:if="${session.user!=null}">
+                <li class="nav-item" th:if="${UnReadMessageCount!=0}">
+                    <a th:href="@{/profile/replies/{page}/{pageSize}(page=1,pageSize=${pagination.getPageSize()})}" class="nav-link">回复<span class="badge badge-pill badge-primary" style="margin-left: 7px;" th:text="${UnReadMessageCount}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                </li>
+
+                <li class="nav-item" th:if="${UnReadMessageCount==0}">
+                    <a th:href="@{/profile/replies/{page}/{pageSize}(page=1,pageSize=${pagination.getPageSize()})}" class="nav-link">回复<span class="badge badge-pill badge-primary" style="margin-left: 7px;"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                </li>
+            </div>
+
+            <div th:if="${session.user!=null}">
+                <li class="nav-item dropdown" >
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false" style="margin-top: -2px" th:text="${session.user.getName()}"></a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div th:if="${pagination!=null}">
+                            <a class="dropdown-item" th:href="@{/profile/questions/{page}/{pageSize}(page=1,pageSize=${pagination.getPageSize()})}">我的消息</a>
+                        </div>
+                        <div th:if="${pagination==null}">
+                            <a class="dropdown-item" th:href="@{/profile/questions/{page}/{pageSize}(page=1,pageSize=15)}">我的消息</a>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/logout">退出登录</a>
+                    </div>
+                </li>
+            </div>
+        </ul>
+    </div>
+</nav>
 <div style="height: 70px"></div>
 
 <div class="container" style="background: white">
     <div class="row">
         <div class="col-md-9" style="padding: 20px;border-color: #e6e6e6;border-style: solid">
+            <h5 style="margin-bottom: 30px;margin-top: 5px;"> <img src="/bootstrap/font/megaphone.svg" alt="" width="30px" height="30px">&nbsp;&nbsp;消息回复</h5>
+
+            <div th:each="notification:${notifications}">
+                <span th:text="${notification.getNotifier().getName()}" style="margin-right: 5px;"></span>
+                <span th:text="${notification.getContent()}" style="margin-right: 5px;"></span>
+                <a th:href="@{/question/{id}(id=${notification.getRelateId()})}" th:text="${notification.getDescription()}" th:data-id="${notification.getId()}" onclick="readMessage(this)"></a>
+                <span class="badge badge-info" th:if="${notification.getStatus()==0}">未读</span>
+                <span class="badge badge-dark" th:if="${notification.getStatus()==1}">已读</span>
+                <hr class="divide">
+
+            </div>
             <div th:if="${pagination!=null}">
                 <nav aria-label="Page navigation example" style="float: right">
                     <ul class="pagination">
@@ -34,9 +95,15 @@
                     </ul>
                 </nav>
             </div>
+        </div>
 
+        <div class="col-md-9" style="padding: 20px;border-color: #e6e6e6;border-style: solid">
 
         </div>
+
+    </div>
+
+</div>
 
 
 

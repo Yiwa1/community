@@ -1,4 +1,4 @@
-create table USER
+create table user
 (
     ID           INT auto_increment,
     ACCOUNT_ID   VARCHAR(100),

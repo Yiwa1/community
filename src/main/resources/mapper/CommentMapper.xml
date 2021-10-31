@@ -4,8 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yiwa.community.dao.CommentMapper">
 
-    <select id="queryCommentByParentId" parameterType="Integer" resultType="Comment">
+    <select id="queryCommentByParentId" resultType="Comment">
         select * from comment where PARENT_ID=#{parentId} and TYPE=#{type}
+    </select>
+
+    <select id="queryCommentById" resultType="Comment">
+        select * from comment where ID=#{id}
     </select>
 
     <insert id="createComment" parameterType="Comment">

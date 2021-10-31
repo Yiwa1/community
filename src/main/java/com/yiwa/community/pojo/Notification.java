@@ -10,7 +10,7 @@ public class Notification {
     private String notifier;
     private String receiver;
     private String content;
-    private Long relateId;
+    private int relateId;
     private int type;
     private Long gmtCreate;
     private int status;
@@ -18,7 +18,7 @@ public class Notification {
     public Notification() {
     }
 
-    public Notification(Long id, String notifier, String receiver, String content, Long relateId, int type, Long gmtCreate, int status) {
+    public Notification(Long id, String notifier, String receiver, String content, int relateId, int type, Long gmtCreate, int status) {
         this.id = id;
         this.notifier = notifier;
         this.receiver = receiver;
@@ -61,11 +61,11 @@ public class Notification {
         this.content = content;
     }
 
-    public Long getRelateId() {
+    public int getRelateId() {
         return relateId;
     }
 
-    public void setRelateId(Long relateId) {
+    public void setRelateId(int relateId) {
         this.relateId = relateId;
     }
 

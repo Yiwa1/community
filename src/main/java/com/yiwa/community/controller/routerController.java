@@ -1,10 +1,12 @@
 package com.yiwa.community.controller;
 
+import com.yiwa.community.dao.NotificationMapper;
 import com.yiwa.community.dao.QuestionMapper;
 import com.yiwa.community.dao.UserMapper;
 import com.yiwa.community.dto.PaginationDTO;
 import com.yiwa.community.dto.QuestionDTO;
 import com.yiwa.community.pojo.User;
+import com.yiwa.community.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +33,9 @@ public class routerController{
 
     @Autowired
     QuestionMapper questionMapper;
+
+    @Autowired
+    NotificationMapper notificationMapper;
 
     @GetMapping("/")
     public String index(HttpServletRequest request,
@@ -59,6 +64,9 @@ public class routerController{
                       * 重定向session的值在新页面为null   *
                       * ********************************/
                       request.getSession().setAttribute("user", user);
+                      //查询未读回复数量
+                      int count = notificationMapper.queryUnReadMessageCount(user.getAccountId());
+                      model.addAttribute("UnReadMessageCount",count);
                       break;
                   }
               }
@@ -88,6 +96,7 @@ public class routerController{
         List<QuestionDTO> questions = questionMapper.queryAllQuestion(offset,pageSize);
         model.addAttribute("questions",questions);
         model.addAttribute("pagination",paginationDTO);
+
         return "index";
     }
 

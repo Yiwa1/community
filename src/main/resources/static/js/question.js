@@ -105,7 +105,6 @@ function subCommentShow(e){
 }
 
 function subComment(e){
-
     let id = e.getAttribute("data-id");
     let content = $("#subComment-content-"+id).val();
     let creator = $("#commenter_id").val();
@@ -140,7 +139,6 @@ function subComment(e){
         complete:function (){
             location.reload();
             $("#subComment-section-"+id).scrollIntoView();
-
         }
     })
 }

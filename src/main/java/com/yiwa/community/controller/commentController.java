@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.yiwa.community.dao.QuestionMapper;
 import com.yiwa.community.dto.CommentDTO;
 import com.yiwa.community.pojo.Comment;
+import com.yiwa.community.pojo.Notification;
 import com.yiwa.community.service.CommentService;
 import com.yiwa.community.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +53,8 @@ public class commentController {
         resultMap.put("status",200);
         resultMap.put("msg","评论发布成功");
         //通知提问者有人回答问题
-//        Notification notification=new Notification();
-//        notificationService.addCommentNotification(notification,comment);
+        Notification notification=new Notification();
+        notificationService.addCommentNotification(notification,comment);
         return resultMap;
     }
 
@@ -69,6 +70,7 @@ public class commentController {
         //此处的id为一级评论id
         List<CommentDTO> commentDTOS = commentService.queryCommentByParentId(id, 1);
         Object res = JSON.toJSON(commentDTOS);
+        Notification notification=new Notification();
         return res;
     }
 

@@ -30,8 +30,17 @@
 
 
             <div th:if="${session.user!=null}">
-                <li class="nav-item">
-                    <a th:href="@{/profile/replies/{page}/{pageSize}(page=1,pageSize=${pagination.getPageSize()})}" class="nav-link">回复<span class="badge badge-pill badge-primary" style="margin-left: 7px;">12</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                <li class="nav-item" th:if="${pagination}!=null and${UnReadMessageCount}!=0">
+                    <a th:href="@{/profile/replies/{page}/{pageSize}(page=1,pageSize=${pagination.getPageSize()})}" class="nav-link">回复<span class="badge badge-pill badge-primary" style="margin-left: 7px;" th:text="${UnReadMessageCount}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                </li>
+                <li class="nav-item" th:if="${pagination}!=null and ${UnReadMessageCount}==0">
+                    <a th:href="@{/profile/replies/{page}/{pageSize}(page=1,pageSize=${pagination.getPageSize()})}" class="nav-link">回复<span class="badge badge-pill badge-primary" style="margin-left: 7px;"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                </li>
+                <li class="nav-item" th:if="${pagination}==null and ${UnReadMessageCount}!=0">
+                    <a th:href="@{/profile/replies/{page}/{pageSize}(page=1,pageSize=15)}" class="nav-link">回复<span class="badge badge-pill badge-primary" style="margin-left: 7px;" th:text="${UnReadMessageCount}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                </li>
+                <li class="nav-item" th:if="${pagination}==null and ${UnReadMessageCount}==0">
+                    <a th:href="@{/profile/replies/{page}/{pageSize}(page=1,pageSize=15)}" class="nav-link">回复<span class="badge badge-pill badge-primary" style="margin-left: 7px;"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                 </li>
             </div>
 
@@ -65,22 +74,6 @@
 
             <h5> <img src="/bootstrap/font/list-ul.svg" alt="" width="30px" height="30px">&nbsp;&nbsp;<span th:text="${sectionName}"></span></h5>
             <hr/>
-
-            <div th:if="${questions!=null}">
-                <ul class="list-unstyled">
-                    <li class="media my-1" th:each="question : ${questions}">
-                        <img th:src="${question.getUser().getAvatarUrl()}" class="mr-3 rounded" alt="..." style="width: 45px;height: 45px">
-                        <div class="media-body">
-                            <h5 class="mt-0 mb-1" style="font-size:15px;"><a th:text="${question.getTitle()}" th:href="@{/question/{id}/(id=${question.getId()})}" style="letter-spacing: 1px"></a></h5>
-                            <span class="questionInfo" style="margin-bottom: 5px">• <span th:text="${question.getUser().getName()}"></span> 发起了问题 • <span th:text="${question.getCommentCount()}"></span> 个回复 • <span th:text="${question.getViewCount()}"></span> 次浏览 • <span th:text="${question.getLikeCount()}"></span>次点赞  • <span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm:ss')}"></span></span>
-                            <hr class="questionInfo">
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-
-
             <div th:if="${pagination!=null}">
                 <nav aria-label="Page navigation example" style="float: right">
                     <ul class="pagination">
