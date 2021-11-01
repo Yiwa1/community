@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yiwa.community.dao.NotificationMapper">
     <select id="queryNotificationByReceiverId" resultType="Notification">
-        select * from notification where RECEIVER=#{receiverId} limit #{offset},#{pageSize}
+        select * from notification where RECEIVER=#{receiverId} order by ID desc limit #{offset},#{pageSize}
     </select>
 
     <select id="queryUnReadMessageCount" resultType="int">

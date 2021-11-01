@@ -114,7 +114,8 @@ public class profileController {
             model.addAttribute("UnReadMessageCount", count);
             model.addAttribute("pagination",paginationDTO);
 
-            List<Notification> notifications = notificationMapper.queryNotificationByReceiverId(user.getAccountId(),page,pageSize);
+
+            List<Notification> notifications = notificationMapper.queryNotificationByReceiverId(user.getAccountId(),offset,pageSize);
             List<NotificationDTO> notificationDTOs = notifications.stream().map(notification -> {
                 NotificationDTO notificationDTO = new NotificationDTO();
                 notificationDTO.setNotifier(userMapper.queryUserByAccountId(notification.getNotifier()));
