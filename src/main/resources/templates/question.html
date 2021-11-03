@@ -5,8 +5,10 @@
     <title th:text="${question.getTitle()}"></title>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="/css/question.css">
+    <link rel="stylesheet" href="/css/editormd.preview.css">
     <script src="/js/question.js"></script>
     <script src="/js/moment.js"></script>
+
 
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -79,7 +81,11 @@
             <h5 th:text="${question.getTitle()}" style="margin-top: 10px;font-size: 23px;letter-spacing: 1px"></h5>
             <span class="questionInfo">作者 <span th:text="${question.getUser().getName()}"></span>|发布于 <span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm:ss')}"></span>|阅读数 <span th:text="${question.getViewCount()}"></span></span>
             <hr/>
-            <span id="description" th:text="${question.getDescription()}"></span>
+
+            <div id="markdown-view">
+                <textarea style="display:none;" th:text="${question.getDescription()}">### Hello world!</textarea>
+            </div>
+<!--            <span id="description" th:text="${question.getDescription()}"></span>-->
             <hr style="margin-top: 6px;margin-bottom: 8px">
             <div style="margin-bottom: 11px;">
                 <a href="#bottom" style="margin-left: 8px;" class="questionInfo"><img src="/bootstrap/font/chat-square-dots.svg" alt="...">&nbsp;添加评论</a>
@@ -186,6 +192,18 @@
 <script src="/js/jquery-3.6.0.js"></script>
 <script src="/bootstrap/js/bootstrap.js"></script>
 <script src="/bootstrap/js/popper.min.js"></script>
+<script src="/js/editormd.js"></script>
+<script src="/lib/marked.min.js"></script>
+<script src="/lib/prettify.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        var testView = editormd.markdownToHTML("markdown-view", {
+            // markdown : "[TOC]\n### Hello world!\n## Heading 2", // Also, you can dynamic set Markdown text
+            // htmlDecode : true,  // Enable / disable HTML tag encode.
+            // htmlDecode : "style,script,iframe",  // Note: If enabled, you should filter some dangerous HTML tags for website security.
+        });
+    });
+</script>
 
 </body>
 </html>
