@@ -78,6 +78,9 @@ public class PaginationDTO {
 
     private void setPageCount() {
         this.pageCount=(int)Math.ceil((double)totalCount/pageSize);
+        if(this.pageCount==0){
+            this.pageCount=1;
+        }
     }
 
     public List<Integer> getPages() {

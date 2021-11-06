@@ -93,7 +93,7 @@ public class profileController {
             if(page==null||page<1){
                 page=1;
             }
-            if(page>(int)Math.ceil((double)messageCount/pageSize)){
+            if(page!=1&&page>(int)Math.ceil((double)messageCount/pageSize)){
                 page=(int)Math.ceil((double)messageCount/pageSize);
             }
             if(pageSize==null){

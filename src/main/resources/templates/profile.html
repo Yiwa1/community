@@ -71,9 +71,20 @@
 <div class="container" style="background: white">
     <div class="row">
         <div class="col-md-9" style="padding: 20px;border-color: #e6e6e6;border-style: solid">
-
             <h5> <img src="/bootstrap/font/list-ul.svg" alt="" width="30px" height="30px">&nbsp;&nbsp;<span th:text="${sectionName}"></span></h5>
             <hr/>
+            <div th:if="${questions!=null}">
+                <ul class="list-unstyled">
+                    <li class="media my-1" th:each="question : ${questions}">
+                        <img th:src="${question.getUser().getAvatarUrl()}" class="mr-3 rounded" alt="..." style="width: 45px;height: 45px">
+                        <div class="media-body">
+                            <h5 class="mt-0 mb-1" style="font-size:15px;"><a th:text="${question.getTitle()}" th:href="@{/question/{id}/(id=${question.getId()})}" style="letter-spacing: 1px"></a></h5>
+                            <span class="questionInfo" style="margin-bottom: 5px">• <span th:text="${question.getUser().getName()}"></span> 发起了问题 • <span th:text="${question.getCommentCount()}"></span> 个回复 • <span th:text="${question.getViewCount()}"></span> 次浏览 • <span th:text="${question.getLikeCount()}"></span>次点赞  • <span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm:ss')}"></span></span>
+                            <hr class="questionInfo">
+                        </div>
+                    </li>
+                </ul>
+            </div>
             <div th:if="${pagination!=null}">
                 <nav aria-label="Page navigation example" style="float: right">
                     <ul class="pagination">
@@ -104,8 +115,8 @@
 
             <div class="col-md-3" style="border-style: solid;border-color: #e6e6e6;border-width: 2px;padding: 1px">
                 <div class="list-group" style="margin-top: 4px;width: 100%">
-                    <a th:href="@{/profile/question/{page}/{pageSize}/(page=1,pageSize=${pagination.getPageSize()})}" th:class="${section}=='questions'? 'list-group-item list-group-item-action active':'list-group-item list-group-item-action'" aria-current="true" style="border-radius: 2px">我的提问</a>
-                    <a th:href="@{/profile/replies/{page}/{pageSize}/(page=1,pageSize=${pagination.getPageSize()})}" th:class="${section}=='replies'?'list-group-item list-group-item-action active':'list-group-item list-group-item-action'">消息提醒<span class="badge badge-secondary offset-2">3</span></a>
+                    <a th:href="@{/profile/questions/{page}/{pageSize}/(page=1,pageSize=${pagination.getPageSize()})}" th:class="${section}=='questions'? 'list-group-item list-group-item-action active':'list-group-item list-group-item-action'" aria-current="true" style="border-radius: 2px">我的提问</a>
+                    <a th:href="@{/profile/replies/{page}/{pageSize}/(page=1,pageSize=${pagination.getPageSize()})}" th:class="${section}=='replies'?'list-group-item list-group-item-action active':'list-group-item list-group-item-action'">消息提醒<span class="badge badge-secondary offset-2" th:text="${UnReadMessageCount}"></span></a>
                 </div>
             </div>
 
