@@ -145,7 +145,10 @@
              height: "300px",
             // markdown: "xxxx",     // dynamic set Markdown text
             path : "/lib/",  // Autoload modules mode, codemirror, marked... dependents libs path
-            watch: false
+            watch: false,
+            imageUpload: true,          // Enable/disable upload
+            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL: "/image/upload",             // Upload url
 
         });
     });
