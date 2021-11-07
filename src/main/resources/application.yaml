@@ -18,3 +18,15 @@ mybatis:
 file:
   upload:
     url: D:/编程文件/community/src/main/resources/static/imageUserUpload
+
+
+logging:
+  file:
+    path: logs/
+    max-size: 1MB
+    max-history: 30
+  level:
+    com.yiwa.community.dao: info
+
+
+

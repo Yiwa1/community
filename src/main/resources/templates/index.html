@@ -11,8 +11,8 @@
     <a class="navbar-brand" href="/">Yiwa's Home</a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="form-inline my-2 my-lg-0 offset-1">
-            <input class="form-control mr-sm-2" type="search" placeholder="搜索问题" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0 offset-1"  action="/">
+            <input class="form-control mr-sm-2" name="search" type="search" placeholder="搜索问题" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
         <ul class="navbar-nav mr-auto offset-5">
@@ -97,21 +97,21 @@
                 <nav aria-label="Page navigation example" style="float: right">
                     <ul class="pagination">
                         <li class="page-item">
-                            <a class="page-link" th:href="@{/(page=1,pageSize=${pagination.getPageSize()})}" th:hidden="${!pagination.hasFront}"><<</a>
+                            <a class="page-link" th:href="@{/(page=1,pageSize=${pagination.getPageSize()},search=${search})}" th:hidden="${!pagination.hasFront}"><<</a>
                         </li>
                         <li class="page-item">
-                            <a class="page-link" th:href="@{/(page=${pagination.getPage()-1},pageSize=${pagination.getPageSize()})}" aria-label="Previous" th:hidden="${!pagination.isHasPre()}">
+                            <a class="page-link" th:href="@{/(page=${pagination.getPage()-1},pageSize=${pagination.getPageSize()},search=${search})}" aria-label="Previous" th:hidden="${!pagination.isHasPre()}">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
-                        <li class="page-item" th:each="item:${pagination.getPages()}" th:class="${item==pagination.getPage()}?'page-item active':''"><a class="page-link" th:href="@{/(page=${item},pageSize=${pagination.getPageSize()})}"  th:text="${item}"></a></li>
+                        <li class="page-item" th:each="item:${pagination.getPages()}" th:class="${item==pagination.getPage()}?'page-item active':''"><a class="page-link" th:href="@{/(page=${item},pageSize=${pagination.getPageSize()},search=${search})}"  th:text="${item}"></a></li>
                         <li class="page-item">
-                            <a class="page-link" th:href="@{/(page=${pagination.getPage()+1},pageSize=${pagination.getPageSize()})}"aria-label="Next" th:hidden="${!pagination.isHasNext()}">
+                            <a class="page-link" th:href="@{/(page=${pagination.getPage()+1},pageSize=${pagination.getPageSize()},search=${search})}"aria-label="Next" th:hidden="${!pagination.isHasNext()}">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
                         <li class="page-item">
-                            <a class="page-link" th:href="@{/(page=${pagination.getPageCount()},pageSize=${pagination.getPageSize()})}" th:hidden="${!pagination.hasEnd}">>></a>
+                            <a class="page-link" th:href="@{/(page=${pagination.getPageCount()},pageSize=${pagination.getPageSize()},search=${search})}" th:hidden="${!pagination.hasEnd}">>></a>
                         </li>
                     </ul>
                 </nav>
@@ -129,7 +129,17 @@
             </ul>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12 questionInfo offset-3" style="margin-top: 45px;">
+            <p>Copyright © 2021· CC BY-NC-SA 3.0 · Yiwa中文社区 · 友情链接<a href="https://github.com/yiwa1"> Yiwa's GitHub</a></p>
+              <p>本站服务器及带宽由 <a href="https://azure.microsoft.com/">Azure</a> 提供赞助 · 网站程序: SpringBoot ·  湘ICP备17007478号</p>
+        </div>
+    </div>
 </div>
+
+
+
 
 
 
