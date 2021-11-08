@@ -17,4 +17,4 @@ mybatis:
 
 file:
   upload:
-    url: D:/编程文件/community/src/main/resources/static/imageUserUpload
+    url: classpath:static/imageUserUpload
