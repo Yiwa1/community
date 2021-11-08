@@ -18,3 +18,15 @@ mybatis:
 file:
   upload:
     url: classpath:static/imageUserUpload
+
+
+logging:
+  file:
+    path: logs/
+    max-size: 1MB
+    max-history: 30
+  level:
+    com.yiwa.community.dao: info
+
+
+

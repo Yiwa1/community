@@ -9,8 +9,6 @@
         <foreach collection="list" item="accountId" index="index" open="(" close=")" separator="," >
             #{accountId}
         </foreach>
-
-
     </select>
 
     <insert id="addUser" parameterType="User">
@@ -24,6 +22,7 @@
     <select id="queryUserByAccountId" resultType="User">
         select * from user where ACCOUNT_ID=#{accountId}
     </select>
+
 
     <update id="updateUserInfo">
         update user

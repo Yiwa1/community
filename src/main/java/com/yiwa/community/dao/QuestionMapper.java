@@ -21,9 +21,13 @@ public interface QuestionMapper {
 
     User queryUserByAccountId(String accountId);
 
+    List<QuestionDTO> queryQuestionByKeyWord(@Param("search") String search,@Param("offset") Integer offset,@Param("pageSize") Integer pageSize);
+
     Integer count();
 
     Integer countQuestionByAccountId(@Param("accountId")String accountId);
+
+    Integer countSearchResult(@Param("search")String search);
 
     void createQuestion(Question question);
 

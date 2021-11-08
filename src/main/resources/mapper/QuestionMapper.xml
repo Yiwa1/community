@@ -37,6 +37,27 @@
         select * from question where id=#{id}
     </select>
 
+    <select id="queryQuestionByKeyWord" resultMap="questions">
+        select * from question
+        <where>
+            <if test="search!=null and search!=''">
+                TITLE regexp #{search}
+            </if>
+        </where>
+        order by gmt_create desc limit #{offset},#{pageSize}
+    </select>
+
+    <select id="countSearchResult" parameterType="string" resultType="Integer">
+        select count(*) from question
+        <where>
+            <if test="search!=null and search!=''">
+                TITLE regexp #{search}
+            </if>
+        </where>
+    </select>
+
+
+
     <update id="updateQuestion">
         update question
          <set>
