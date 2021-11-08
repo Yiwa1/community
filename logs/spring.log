@@ -625,3 +625,38 @@ org.apache.ibatis.binding.BindingException: Parameter 'offset' not found. Availa
 2021-11-07 14:53:13.723  INFO 24168 --- [http-nio-8080-exec-7] c.y.c.controller.routerController        : 79003485 用户再次登录
 2021-11-07 14:53:22.991  INFO 24168 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
 2021-11-07 14:53:22.995  INFO 24168 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2021-11-08 14:47:11.352  INFO 3843 --- [restartedMain] com.yiwa.community.CommunityApplication  : Starting CommunityApplication using Java 1.8.0_212 on yiwa with PID 3843 (/home/yiwa/GitHub/community/target/classes started by yiwa in /home/yiwa/GitHub/community)
+2021-11-08 14:47:11.355  INFO 3843 --- [restartedMain] com.yiwa.community.CommunityApplication  : The following profiles are active: dev
+2021-11-08 14:47:11.423  INFO 3843 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-11-08 14:47:11.424  INFO 3843 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-11-08 14:47:12.778  INFO 3843 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-11-08 14:47:12.788  INFO 3843 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-11-08 14:47:12.788  INFO 3843 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.52]
+2021-11-08 14:47:12.844  INFO 3843 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-11-08 14:47:12.844  INFO 3843 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1419 ms
+2021-11-08 14:47:13.557  INFO 3843 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-11-08 14:47:13.733  INFO 3843 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-11-08 14:47:13.766  INFO 3843 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-11-08 14:47:13.778  INFO 3843 --- [restartedMain] com.yiwa.community.CommunityApplication  : Started CommunityApplication in 2.98 seconds (JVM running for 3.556)
+2021-11-08 14:47:14.100  INFO 3843 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-11-08 14:47:14.100  INFO 3843 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-11-08 14:47:14.101  INFO 3843 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2021-11-08 14:47:14.188  INFO 3843 --- [http-nio-8080-exec-1] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2021-11-08 14:47:14.353  INFO 3843 --- [http-nio-8080-exec-1] c.y.c.controller.routerController        : 79003485 用户再次登录
+2021-11-08 14:47:43.526  INFO 3843 --- [http-nio-8080-exec-2] c.y.c.controller.routerController        : 79003485 用户再次登录
+2021-11-08 14:47:45.523  INFO 3843 --- [http-nio-8080-exec-9] c.y.c.controller.routerController        : 79003485 用户再次登录
+2021-11-08 14:49:10.389  INFO 3843 --- [Thread-10] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+2021-11-08 14:49:10.399  INFO 3843 --- [Thread-10] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2021-11-08 14:49:10.529  INFO 3843 --- [restartedMain] com.yiwa.community.CommunityApplication  : Starting CommunityApplication using Java 1.8.0_212 on yiwa with PID 3843 (/home/yiwa/GitHub/community/target/classes started by yiwa in /home/yiwa/GitHub/community)
+2021-11-08 14:49:10.530  INFO 3843 --- [restartedMain] com.yiwa.community.CommunityApplication  : The following profiles are active: dev
+2021-11-08 14:49:10.735  INFO 3843 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-11-08 14:49:10.736  INFO 3843 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-11-08 14:49:10.736  INFO 3843 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.52]
+2021-11-08 14:49:10.741  INFO 3843 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-11-08 14:49:10.741  INFO 3843 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 209 ms
+2021-11-08 14:49:10.880  INFO 3843 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-11-08 14:49:10.924  INFO 3843 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-11-08 14:49:10.936  INFO 3843 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-11-08 14:49:10.941  INFO 3843 --- [restartedMain] com.yiwa.community.CommunityApplication  : Started CommunityApplication in 0.439 seconds (JVM running for 120.719)
+2021-11-08 14:49:10.943  INFO 3843 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2021-11-08 14:49:29.630  INFO 3843 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-0} closing ...

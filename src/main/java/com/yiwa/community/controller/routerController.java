@@ -65,7 +65,7 @@ public class routerController{
                   User user = userMapper.queryUserByToken(token);
                   if (user != null) {
                       //回头客
-                      logger.info(user.getAccountId()+" 用户再次登录");
+                      logger.info(user.getAccountId()+" 用户再次访问");
                       //将用户信息存入session中，用于页面展示信息
                       /*
                       *********************************

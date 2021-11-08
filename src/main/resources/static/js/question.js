@@ -21,7 +21,7 @@ $.ajax({
       }else if(response.status==1314){
          var isAccepted=confirm(response.msg);
          if(isAccepted){
-             window.open("https://github.com/login/oauth/authorize?client_id=723ca7c1206fcfbff6cb&redirect_uri=http://localhost:8080/callback&scop=user");
+             window.open("https://github.com/login/oauth/authorize?client_id=723ca7c1206fcfbff6cb&redirect_uri=http://localhost:80/callback&scop=user");
              window.localStorage.setItem("closeable","true");
          }
       }else {
@@ -30,7 +30,7 @@ $.ajax({
 
     },
     complete:function (){
-        $("#comment-main").load("http://localhost:8080/question/"+id+" #comment-origin");
+        $("#comment-main").load("http://localhost:80/question/"+id+" #comment-origin");
     },
     dataType:"json"
     })
@@ -51,7 +51,7 @@ function subCommentShow(e){
             //没有查询
             $.ajax({
                 type:"POST",
-                url:"http://localhost:8080/subComment/"+id,
+                url:"http://localhost:80/subComment/"+id,
                 dataType: "json",
                 success: function (response){
                     $.each(response,function (index,subcomment){
@@ -113,7 +113,7 @@ function subComment(e){
     $.ajax({
         type:"POST",
         contentType: "application/json",
-        url:"http://localhost:8080/comment",
+        url:"http://localhost:80/comment",
         data: JSON.stringify(
             {
             "type":1,
@@ -129,7 +129,7 @@ function subComment(e){
             }else if(response.status==1314){
                 var isAccepted=confirm(response.msg);
                 if(isAccepted){
-                    window.open("https://github.com/login/oauth/authorize?client_id=723ca7c1206fcfbff6cb&redirect_uri=http://localhost:8080/callback&scop=user");
+                    window.open("https://github.com/login/oauth/authorize?client_id=723ca7c1206fcfbff6cb&redirect_uri=http://localhost:80/callback&scop=user");
                     window.localStorage.setItem("closeable","true");
                 }
             }else {
