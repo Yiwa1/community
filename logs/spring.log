@@ -72,3 +72,5 @@
 2021-11-11 19:22:36.692  INFO 5007 --- [http-nio-8080-exec-8] c.y.c.controller.routerController        : 79003485 用户再次访问
 2021-11-11 19:22:38.520  INFO 5007 --- [http-nio-8080-exec-7] c.y.c.controller.routerController        : 79003485 用户再次访问
 2021-11-11 19:22:45.317  INFO 5007 --- [http-nio-8080-exec-5] c.y.c.controller.routerController        : 79003485 用户再次访问
+2021-11-11 20:47:34.562  INFO 5007 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+2021-11-11 20:47:34.564  INFO 5007 --- [SpringApplicationShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
