@@ -11,8 +11,8 @@
     <a class="navbar-brand" href="/">Yiwa's Home</a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="form-inline my-2 my-lg-0 offset-1" action="/">
-            <input class="form-control mr-sm-2" type="search" name="search" placeholder="搜索问题" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0 offset-1"  action="/">
+            <input class="form-control mr-sm-2" name="search" type="search" placeholder="搜索问题" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
         <ul class="navbar-nav mr-auto offset-5">
@@ -24,10 +24,9 @@
 
             <div th:if="${session.user!=null}">
                 <li class="nav-item">
-                    <a href="/publish" class="nav-link">提问&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <a href="/publish" class="nav-link">提问&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                 </li>
             </div>
-
 
             <div th:if="${session.user!=null}">
                 <li class="nav-item" th:if="${pagination}!=null and${UnReadMessageCount}!=0">
@@ -44,7 +43,6 @@
                 </li>
             </div>
 
-
             <div th:if="${session.user!=null}">
                 <li class="nav-item dropdown" >
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false" style="margin-top: -2px" th:text="${session.user.getName()}"></a>
@@ -55,14 +53,12 @@
                         <div th:if="${pagination==null}">
                             <a class="dropdown-item" th:href="@{/profile/questions/{page}/{pageSize}(page=1,pageSize=15)}">我的消息</a>
                         </div>
-
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/logout">退出登录</a>
                     </div>
                 </li>
             </div>
         </ul>
-
     </div>
 </nav>
 
