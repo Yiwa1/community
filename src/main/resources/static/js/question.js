@@ -21,7 +21,7 @@ $.ajax({
       }else if(response.status==1314){
          var isAccepted=confirm(response.msg);
          if(isAccepted){
-             window.open("https://github.com/login/oauth/authorize?client_id=723ca7c1206fcfbff6cb&redirect_uri=http://localhost:8080:80/callback&scop=user");
+             window.open("https://github.com/login/oauth/authorize?client_id=9ccf32dccdbe1ff11422&redirect_uri=http://localhost:8080/callback&scop=user");
              window.localStorage.setItem("closeable","true");
          }
       }else {
@@ -129,7 +129,7 @@ function subComment(e){
             }else if(response.status==1314){
                 var isAccepted=confirm(response.msg);
                 if(isAccepted){
-                    window.open("https://github.com/login/oauth/authorize?client_id=723ca7c1206fcfbff6cb&redirect_uri=http://localhost:8080:80/callback&scop=user");
+                    window.open("https://github.com/login/oauth/authorize?client_id=9ccf32dccdbe1ff11422&redirect_uri=http://localhost:8080:80/callback&scop=user");
                     window.localStorage.setItem("closeable","true");
                 }
             }else {

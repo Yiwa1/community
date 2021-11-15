@@ -11,30 +11,25 @@
 
 
 </head>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" id="logo-yiwa" href="/">Yiwa's Home</a>
-
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="/">Yiwa's Home</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="form-inline my-2 my-lg-0 offset-1" action="/">
-            <input class="form-control mr-sm-2" type="search" placeholder="搜索问题"  name="search" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0 offset-1"  action="/">
+            <input class="form-control mr-sm-2" name="search" type="search" placeholder="搜索问题" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
         <ul class="navbar-nav mr-auto offset-5">
             <div th:if="${session.user==null}">
                 <li class="nav-item">
-                    <a class="nav-link" href="https://localgithub.com/login/oauth/authorize?client_id=723ca7c1206fcfbff6cb&redirect_uri=http://localhost:8080/callback&scop=user" tabindex="-1" aria-disabled="true">登录</a>
+                    <a class="nav-link" href="https://github.com/login/oauth/authorize?client_id=9ccf32dccdbe1ff11422&redirect_uri=http://localhost:8080/callback&scop=user" tabindex="-1" aria-disabled="true">登录</a>
                 </li>
             </div>
 
             <div th:if="${session.user!=null}">
                 <li class="nav-item">
-                    <a href="/publish" class="nav-link">提问&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <a href="/publish" class="nav-link">提问&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                 </li>
             </div>
-
-
-
-
 
             <div th:if="${session.user!=null}">
                 <li class="nav-item" th:if="${pagination}!=null and${UnReadMessageCount}!=0">
@@ -51,19 +46,16 @@
                 </li>
             </div>
 
-
             <div th:if="${session.user!=null}">
                 <li class="nav-item dropdown" >
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false" style="margin-top: -2px" th:text="${session.user.getName()}"></a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <div th:if="${pagination!=null}">
-                            <a class="dropdown-item" th:href="@{/profile/questions/{page}/{pageSize}/(page=1,pageSize=${pagination.getPageSize()})}">我的消息</a>
+                            <a class="dropdown-item" th:href="@{/profile/questions/{page}/{pageSize}(page=1,pageSize=${pagination.getPageSize()})}">我的消息</a>
                         </div>
                         <div th:if="${pagination==null}">
-                            <a class="dropdown-item" th:href="@{/profile/questions/{page}/{pageSize}/(page=1,pageSize=15)}">我的消息</a>
+                            <a class="dropdown-item" th:href="@{/profile/questions/{page}/{pageSize}(page=1,pageSize=15)}">我的消息</a>
                         </div>
-
-
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/logout">退出登录</a>
                     </div>
@@ -73,7 +65,7 @@
     </div>
 </nav>
 
-<div style="height: 65px;"></div>
+<div style="height: 75px;"></div>
 
 <div class="container" style="background: white">
     <div class="row">
