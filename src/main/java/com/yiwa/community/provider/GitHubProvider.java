@@ -83,6 +83,11 @@ public class GitHubProvider {
         return null;
     }
 
+    /**
+     * 利用GitHub API上传图片
+     * @Author yiwa
+     * @Date 2021/11/12
+     * */
     public String uploadUserImage(GitHubUploadImageDTO gitHubUploadImageDTO,String fileName){
         MediaType mediaType=MediaType.get("application/json; charset=utf-8");
         //由于访问GitHub速度较慢注意设置连接时长
