@@ -2,9 +2,12 @@ package com.yiwa.community.provider;
 
 import com.alibaba.fastjson.JSON;
 import com.yiwa.community.dto.AccessTokenDTO;
+import com.yiwa.community.dto.GitHubUploadImageDTO;
 import com.yiwa.community.dto.GitHubUser;
 import okhttp3.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -15,8 +18,11 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0
  * @Date: 2012/9/14
  * */
-@Component
+@Service
 public class GitHubProvider {
+
+    @Value("${github.user.token}")
+    String githubUserToken;
 
     /**
      * 通过post请求获取access_token
@@ -75,6 +81,30 @@ public class GitHubProvider {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public String uploadUserImage(GitHubUploadImageDTO gitHubUploadImageDTO,String fileName){
+        MediaType mediaType=MediaType.get("application/json; charset=utf-8");
+        //由于访问GitHub速度较慢注意设置连接时长
+        OkHttpClient client=new OkHttpClient.Builder()
+                .connectTimeout(210,TimeUnit.SECONDS)
+                .readTimeout(210,TimeUnit.SECONDS)
+                .writeTimeout(210,TimeUnit.SECONDS)
+                .build();
+        RequestBody body=RequestBody.create(mediaType,JSON.toJSONString(gitHubUploadImageDTO));
+        Request request=new Request.Builder()
+                .url("https://api.github.com//repos/Yiwa1/Picture-bed/contents/community/"+fileName)
+                .header("Authorization","token "+githubUserToken)
+                .put(body)
+                .build();
+        try(Response response=client.newCall(request).execute()) {
+            String res=response.body().string();
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
 
 }

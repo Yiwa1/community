@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev
+    active: prod
   thymeleaf:
     cache: false
 
@@ -8,6 +8,8 @@ github:
   client:
     id: 723ca7c1206fcfbff6cb
     secret: 1d95bd7386cece906dad5112cd3ef0a7a63d550a
+  user:
+    token: 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
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
