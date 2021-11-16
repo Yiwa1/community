@@ -3,7 +3,6 @@ package com.yiwa.community.cache;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 @Component

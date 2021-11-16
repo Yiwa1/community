@@ -3,7 +3,6 @@ package com.yiwa.community.schedule;
 import com.yiwa.community.cache.HotTag;
 import com.yiwa.community.dao.QuestionMapper;
 import com.yiwa.community.dto.QuestionDTO;
-import com.yiwa.community.pojo.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ public class HotTagSchedule {
     @Autowired
     QuestionMapper questionMapper;
 
-    @Scheduled(fixedRate =3000 )
+    @Scheduled(cron = "0 0 7,13,18 * * ?")
     public void updateHotTag(){
         Map<String,Integer> map=new HashMap<>();
         int offset=0;
