@@ -20,8 +20,8 @@ public class FileUtil {
 
             data = baos.toByteArray();
 
-            fis.close();
             baos.close();
+            fis.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

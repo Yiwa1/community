@@ -89,9 +89,8 @@ public class fileController {
 //                imageFileDTO.setMessage("图片上传失败");
 //            }
             //将文件从本地服务器删除
-            File deleteFile = new File(fileStorePath+"src/main/resources/static/imageUserUpload/"+uuid+file.getOriginalFilename());
-            deleteFile.delete();
-        }
+            dest.delete();
+            }
         return JSON.toJSONString(imageFileDTO);
     }
 }
