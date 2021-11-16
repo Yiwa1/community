@@ -6,10 +6,10 @@ spring:
 
 github:
   client:
-    id: 723ca7c1206fcfbff6cb
-    secret: 1d95bd7386cece906dad5112cd3ef0a7a63d550a
+    id: 9ccf32dccdbe1ff11422
+    secret: 248dea280baf08db093641ec282bc0481fe7ed9b
   user:
-    token: "*******"
+    token: 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
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

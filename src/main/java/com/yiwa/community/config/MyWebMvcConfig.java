@@ -5,6 +5,7 @@ import com.yiwa.community.Interceptor.UserLoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * WebMvcConfig
@@ -25,6 +26,7 @@ public class MyWebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(userLoginInterceptor). addPathPatterns("/publish").addPathPatterns("/profile/**").addPathPatterns("/logout");
         //拦截无权限修改问题用户
         registry.addInterceptor(modifyQuestionInterceptor).addPathPatterns("/publish/*");
-
     }
+
+
 }

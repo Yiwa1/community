@@ -120,12 +120,18 @@
 
 
         <div class="col-md-3" style="border-style: solid;border-color: #e6e6e6;border-width: 2px">
-
-            <img src="https://longsheng.org/wp-content/uploads/2014/03/20072012_koOW.jpg" alt="" width="100%">
-            <img src="https://longsheng.org/wp-content/uploads/2014/03/20072013_6qRM.jpg" alt="" width="100%" style="margin-top: 35px;">
-            <h3 style="margin-top: 45px"><img src="/bootstrap/font/chat-right-text.svg" alt="请仔细阅读" width="30px" height="30px">&nbsp;&nbsp;热门问题</h3>
+            <img th:src="${girlImg}" alt="" width="100%">
+            <h4 style="margin-top: 45px"><img src="/bootstrap/font/chat-right-text.svg" alt="请仔细阅读" width="30px" height="30px">&nbsp;&nbsp;热门问题</h4>
             <hr/>
-            <ul class="list-group">
+            <ul class="list-group" style="margin-bottom: 25px;">
+               <li class="list-group-item" th:each="hottag:${hotTags}">
+                   <span class="badge-secondary badge-pill"><a style="text-decoration: none;color: white" th:href="@{/(page=1,pageSize=${pagination.getPageSize()},search=${hottag.getKey()})}" th:text="${hottag.getKey()}"></a></span>
+                   <br>
+                   <div class="badge-danger badge-pill" style="width: 50%">
+                       <span>&nbsp;热度</span>
+                       <span th:text="${hottag.getValue()}"></span>
+                   </div>
+               </li>
             </ul>
         </div>
     </div>

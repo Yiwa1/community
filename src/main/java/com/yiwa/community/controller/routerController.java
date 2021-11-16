@@ -1,5 +1,7 @@
 package com.yiwa.community.controller;
 
+import com.yiwa.community.cache.HotTag;
+import com.yiwa.community.cache.LanguageGirl;
 import com.yiwa.community.dao.NotificationMapper;
 import com.yiwa.community.dao.QuestionMapper;
 import com.yiwa.community.dao.UserMapper;
@@ -19,6 +21,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 
@@ -135,6 +138,14 @@ public class routerController{
           model.addAttribute("questions", questions);
           model.addAttribute("pagination", paginationDTO);
       }
+
+        //添加热度标签
+        model.addAttribute("hotTags",HotTag.getHotTagEntryList());
+        //生成随机数0-4
+        Random random=new Random();
+        int girlNum = Math.abs(random.nextInt()) % 5;
+        logger.info("这次选到"+girlNum+"号女嘉宾");
+        model.addAttribute("girlImg", LanguageGirl.getGirlPicture().get(girlNum));
         return "index";
     }
 

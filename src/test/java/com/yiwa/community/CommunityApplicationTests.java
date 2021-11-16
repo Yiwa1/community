@@ -13,11 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.sql.DataSource;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 @SpringBootTest
@@ -62,11 +64,6 @@ class CommunityApplicationTests {
 
     @Test
     void notificationLoads(){
-        File file=new File("/home/yiwa/.config/clash/logo.png");
-        byte[] bytes = FileUtil.fileConvertToByteArray(file);
-        String encodeToString = Base64.getEncoder().encodeToString(bytes);
-        System.out.println(encodeToString);
-
 
     }
 
